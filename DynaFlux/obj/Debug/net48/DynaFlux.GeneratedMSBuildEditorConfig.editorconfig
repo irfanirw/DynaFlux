@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = DynaFlux
+build_property.ProjectDir = /Users/irfan/Projects/DynaFlux/DynaFlux/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

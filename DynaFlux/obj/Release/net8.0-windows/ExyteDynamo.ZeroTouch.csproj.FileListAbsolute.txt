@@ -1,0 +1,11 @@
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/bin/Release/net8.0-windows/ExyteDynamo.ZeroTouch.deps.json
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/bin/Release/net8.0-windows/ExyteDynamo.ZeroTouch.dll
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/bin/Release/net8.0-windows/ExyteDynamo.ZeroTouch.pdb
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/ExyteDynamo.ZeroTouch.GeneratedMSBuildEditorConfig.editorconfig
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/ExyteDynamo.ZeroTouch.AssemblyInfoInputs.cache
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/ExyteDynamo.ZeroTouch.AssemblyInfo.cs
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/ExyteDynamo.ZeroTouch.csproj.CoreCompileInputs.cache
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/ExyteDynamo.ZeroTouch.dll
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/refint/ExyteDynamo.ZeroTouch.dll
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/ExyteDynamo.ZeroTouch.pdb
+/Users/irfan/Projects/ExyteDynamo/ExyteDynamo.ZeroTouch/obj/Release/net8.0-windows/ref/ExyteDynamo.ZeroTouch.dll

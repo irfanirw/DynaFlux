@@ -1,0 +1,14 @@
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/bin/Debug/net9.0/InspectFluxSurface
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/bin/Debug/net9.0/InspectFluxSurface.deps.json
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/bin/Debug/net9.0/InspectFluxSurface.runtimeconfig.json
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/bin/Debug/net9.0/InspectFluxSurface.dll
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/bin/Debug/net9.0/InspectFluxSurface.pdb
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/InspectFluxSurface.GeneratedMSBuildEditorConfig.editorconfig
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/InspectFluxSurface.AssemblyInfoInputs.cache
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/InspectFluxSurface.AssemblyInfo.cs
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/InspectFluxSurface.csproj.CoreCompileInputs.cache
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/InspectFluxSurface.dll
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/refint/InspectFluxSurface.dll
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/InspectFluxSurface.pdb
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/InspectFluxSurface.genruntimeconfig.cache
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxSurface/obj/Debug/net9.0/ref/InspectFluxSurface.dll

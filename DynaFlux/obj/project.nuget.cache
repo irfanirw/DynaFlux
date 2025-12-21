@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ntSzjxDG7k4=",
+  "success": true,
+  "projectFilePath": "/Users/irfan/Projects/DynaFlux/DynaFlux/DynaFlux.csproj",
+  "expectedPackageFiles": [
+    "/Users/irfan/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
+    "/Users/irfan/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
+  ],
+  "logs": []
+}

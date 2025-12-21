@@ -1,0 +1,14 @@
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/bin/Debug/net9.0/InspectFluxConstruction
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/bin/Debug/net9.0/InspectFluxConstruction.deps.json
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/bin/Debug/net9.0/InspectFluxConstruction.runtimeconfig.json
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/bin/Debug/net9.0/InspectFluxConstruction.dll
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/bin/Debug/net9.0/InspectFluxConstruction.pdb
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/InspectFluxConstruction.GeneratedMSBuildEditorConfig.editorconfig
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/InspectFluxConstruction.AssemblyInfoInputs.cache
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/InspectFluxConstruction.AssemblyInfo.cs
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/InspectFluxConstruction.csproj.CoreCompileInputs.cache
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/InspectFluxConstruction.dll
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/refint/InspectFluxConstruction.dll
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/InspectFluxConstruction.pdb
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/InspectFluxConstruction.genruntimeconfig.cache
+/Users/irfan/Projects/ExyteDynamo/scripts/InspectFluxConstruction/obj/Debug/net9.0/ref/InspectFluxConstruction.dll

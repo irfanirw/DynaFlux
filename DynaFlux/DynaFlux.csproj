@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>DynaFlux</AssemblyName>
+    <RootNamespace>DynaFlux</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="DynaFlux">
+      <HintPath>..\DynaFluxCore\bin\Debug\net48\DynaFluxCore.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!--
+    Dynamo/Revit assemblies are not referenced here.
+    Add references to DynamoServices.dll and DynamoCore.dll from your Revit/Dynamo install
+    (or PackageReferences, if your environment uses NuGet packages).
+  -->
+</Project>

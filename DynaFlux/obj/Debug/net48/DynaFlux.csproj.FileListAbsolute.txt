@@ -1,0 +1,5 @@
+/Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.csproj.AssemblyReference.cache
+/Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.GeneratedMSBuildEditorConfig.editorconfig
+/Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.AssemblyInfoInputs.cache
+/Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.AssemblyInfo.cs
+/Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.csproj.CoreCompileInputs.cache
