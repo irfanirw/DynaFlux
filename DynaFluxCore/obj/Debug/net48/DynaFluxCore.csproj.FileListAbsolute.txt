@@ -36,3 +36,9 @@
 /Users/irfan/Projects/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFlux.6FA7CD96.Up2Date
 /Users/irfan/Projects/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.dll
 /Users/irfan/Projects/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.pdb
+/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.csproj.AssemblyReference.cache
+/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.GeneratedMSBuildEditorConfig.editorconfig
+/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.csproj.CoreCompileInputs.cache
+/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.sourcelink.json
+/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.dll
+/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.pdb
