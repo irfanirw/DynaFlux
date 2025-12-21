@@ -55,27 +55,13 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "DynamoVisualProgramming.Core": {
-              "target": "Package",
-              "version": "[3.2.1.5366, )"
-            },
             "DynamoVisualProgramming.DynamoServices": {
               "target": "Package",
               "version": "[3.2.1.5366, )"
             },
-            "Grasshopper": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "target": "Package",
-              "version": "[8.0.23304.9001, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
-            },
-            "RhinoCommon": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "target": "Package",
-              "version": "[8.0.23304.9001, )"
             },
             "System.Text.Json": {
               "target": "Package",
@@ -113,27 +99,13 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "DynamoVisualProgramming.Core": {
-              "target": "Package",
-              "version": "[3.2.1.5366, )"
-            },
             "DynamoVisualProgramming.DynamoServices": {
               "target": "Package",
               "version": "[3.2.1.5366, )"
             },
-            "Grasshopper": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "target": "Package",
-              "version": "[8.0.23304.9001, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
-            },
-            "RhinoCommon": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "target": "Package",
-              "version": "[8.0.23304.9001, )"
             },
             "System.Text.Json": {
               "target": "Package",
@@ -161,18 +133,9 @@
         "net48": {
           "targetAlias": "net48",
           "dependencies": {
-            "DynamoVisualProgramming.Core": {
-              "target": "Package",
-              "version": "[3.2.1.5366, )"
-            },
             "DynamoVisualProgramming.DynamoServices": {
               "target": "Package",
               "version": "[3.2.1.5366, )"
-            },
-            "Grasshopper": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "target": "Package",
-              "version": "[8.0.23304.9001, )"
             },
             "Microsoft.NETFramework.ReferenceAssemblies": {
               "suppressParent": "All",
@@ -183,11 +146,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
-            },
-            "RhinoCommon": {
-              "include": "Compile, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "target": "Package",
-              "version": "[8.0.23304.9001, )"
             },
             "System.Text.Json": {
               "target": "Package",

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DynaFlux")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23bb03e2c287fff72809b8bd67846bb05310d702")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e32c78d55b2dd9937e81efc8f03808a913a276b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DynaFlux")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DynaFlux")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
