@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/irfan/Projects/DynaFlux/DynaFlux/DynaFlux.csproj",
+      "projectUniqueName": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFlux/DynaFlux.csproj",
       "projectName": "DynaFlux",
-      "projectPath": "/Users/irfan/Projects/DynaFlux/DynaFlux/DynaFlux.csproj",
+      "projectPath": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFlux/DynaFlux.csproj",
       "packagesPath": "/Users/irfan/.nuget/packages/",
-      "outputPath": "/Users/irfan/Projects/DynaFlux/DynaFlux/obj/",
+      "outputPath": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFlux/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/irfan/.nuget/NuGet/NuGet.Config"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/irfan/Projects/DynaFlux/DynaFluxCore/DynaFluxCore.csproj": {}
+    "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj": {}
   },
   "projects": {
-    "/Users/irfan/Projects/DynaFlux/DynaFluxCore/DynaFluxCore.csproj": {
+    "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/irfan/Projects/DynaFlux/DynaFluxCore/DynaFluxCore.csproj",
+        "projectUniqueName": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj",
         "projectName": "DynaFluxCore",
-        "projectPath": "/Users/irfan/Projects/DynaFlux/DynaFluxCore/DynaFluxCore.csproj",
+        "projectPath": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj",
         "packagesPath": "/Users/irfan/.nuget/packages/",
-        "outputPath": "/Users/irfan/Projects/DynaFlux/DynaFluxCore/obj/",
+        "outputPath": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
