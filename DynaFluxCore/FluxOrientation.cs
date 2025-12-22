@@ -1,4 +1,4 @@
-using Rhino.Geometry;
+using Autodesk.DesignScript.Geometry;
 using System;
 
 namespace DynaFluxCore
@@ -7,7 +7,7 @@ namespace DynaFluxCore
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public Vector3d Normal { get; set; }
+        public Vector Normal { get; set; }
         public double AngleToNorth { get; set; } = double.NaN;
         public double Cf { get; set; }
 
@@ -15,7 +15,7 @@ namespace DynaFluxCore
         {
             Id = string.Empty;
             Name = string.Empty;
-            Normal = Vector3d.ZAxis;
+            Normal = Vector.ZAxis;
         }
 
         public void AssignOrientation()

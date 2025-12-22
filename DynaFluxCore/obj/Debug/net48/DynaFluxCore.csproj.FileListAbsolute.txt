@@ -42,3 +42,26 @@
 /Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.sourcelink.json
 /Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.dll
 /Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net48/DynaFluxCore.pdb
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net48\DynaFluxCore.csproj.AssemblyReference.cache
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net48\DynaFluxCore.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net48\DynaFluxCore.csproj.CoreCompileInputs.cache
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net48\DynaFluxCore.sourcelink.json
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net48\DynaFluxCore.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net48\DynaFluxCore.pdb
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\DynaFluxCore.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\DynaFluxCore.pdb
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\DynamoServices.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\Microsoft.Bcl.AsyncInterfaces.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\Newtonsoft.Json.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.Buffers.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.IO.Pipelines.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.Memory.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.Numerics.Vectors.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.Runtime.CompilerServices.Unsafe.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.Text.Encodings.Web.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.Text.Json.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.Threading.Tasks.Extensions.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\System.ValueTuple.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net48\DynaFlux.6FA7CD96.Up2Date
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\DynamoCore.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net48\ProtoGeometry.dll

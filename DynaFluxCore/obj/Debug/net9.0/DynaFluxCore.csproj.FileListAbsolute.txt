@@ -25,3 +25,18 @@
 /Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net9.0/DynaFluxCore.dll
 /Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net9.0/refint/DynaFluxCore.dll
 /Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/Debug/net9.0/DynaFluxCore.pdb
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\DynaFluxCore.csproj.AssemblyReference.cache
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\DynaFluxCore.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\DynaFluxCore.csproj.CoreCompileInputs.cache
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\DynaFluxCore.sourcelink.json
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\DynaFluxCore.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\refint\DynaFluxCore.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\DynaFluxCore.pdb
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net9.0\DynaFluxCore.deps.json
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net9.0\DynaFluxCore.dll
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net9.0\DynaFluxCore.pdb
+c:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\ref\DynaFluxCore.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net9.0\DynamoCore.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net9.0\DynamoServices.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\bin\Debug\net9.0\ProtoGeometry.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFluxCore\obj\Debug\net9.0\DynaFlux.6FA7CD96.Up2Date

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Rhino.Geometry;
+using Autodesk.DesignScript.Geometry;
 
 namespace DynaFluxCore
 {
@@ -189,12 +189,34 @@ namespace DynaFluxCore
         private static double GetSurfaceArea(FluxSurface surface)
         {
             if (surface?.Geometry is not Mesh mesh) return 0.0;
-            if (!mesh.IsValid || mesh.Faces.Count == 0) return 0.0;
+            if (!mesh.IsValid || mesh.FaceCount == 0) return 0.0;
 
-            var amp = AreaMassProperties.Compute(mesh);
-            if (amp == null || amp.Area <= double.Epsilon) return 0.0;
+            double area = 0.0;
+            for (int i = 0; i < mesh.FaceCount; i++)
+            {
+                var f = mesh.GetFaceIndices(i);
+                if (f == null || f.Length < 3) continue;
 
-            return amp.Area;
+                var a = mesh.VertexAt(f[0]);
+                var b = mesh.VertexAt(f[1]);
+                var c = mesh.VertexAt(f[2]);
+                area += TriangleArea(a, b, c);
+                if (f.Length == 4)
+                {
+                    var d = mesh.VertexAt(f[3]);
+                    area += TriangleArea(a, c, d);
+                }
+            }
+
+            return area > double.Epsilon ? area : 0.0;
+        }
+
+        private static double TriangleArea(Autodesk.DesignScript.Geometry.Point a, Autodesk.DesignScript.Geometry.Point b, Autodesk.DesignScript.Geometry.Point c)
+        {
+            var v1 = Autodesk.DesignScript.Geometry.Vector.ByCoordinates(b.X - a.X, b.Y - a.Y, b.Z - a.Z);
+            var v2 = Autodesk.DesignScript.Geometry.Vector.ByCoordinates(c.X - a.X, c.Y - a.Y, c.Z - a.Z);
+            var cross = Autodesk.DesignScript.Geometry.Vector.Cross(v1, v2);
+            return 0.5 * cross.Length;
         }
     }
 }

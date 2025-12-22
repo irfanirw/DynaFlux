@@ -1,5 +1,5 @@
 using System.Text;
-using Rhino.Geometry;
+using Autodesk.DesignScript.Geometry;
 
 namespace DynaFluxCore
 {
@@ -19,7 +19,7 @@ namespace DynaFluxCore
             // Geometry summary
             if (surface.Geometry is Mesh m && m.IsValid)
             {
-                sb.AppendLine($"Mesh: V={m.Vertices.Count}, F={m.Faces.Count}");
+                sb.AppendLine($"Mesh: V={m.VertexCount}, F={m.FaceCount}");
                 sb.AppendLine($"Area (approx): {ApproxMeshArea(m):0.###} m²");
             }
             else
@@ -45,34 +45,31 @@ namespace DynaFluxCore
         {
             if (mesh == null || !mesh.IsValid) return 0.0;
 
-            // Fast, reliable area from Rhino
-            var amp = AreaMassProperties.Compute(mesh);
-            if (amp != null)
-                return amp.Area;
-
-            // Fallback manual triangulation
             double area = 0.0;
-            for (int i = 0; i < mesh.Faces.Count; i++)
+            for (int i = 0; i < mesh.FaceCount; i++)
             {
-                var f = mesh.Faces[i];
-                var a = mesh.Vertices[f.A];
-                var b = mesh.Vertices[f.B];
-                var c = mesh.Vertices[f.C];
+                var f = mesh.GetFaceIndices(i);
+                if (f == null || f.Length < 3) continue;
+
+                var a = mesh.VertexAt(f[0]);
+                var b = mesh.VertexAt(f[1]);
+                var c = mesh.VertexAt(f[2]);
                 area += TriangleArea(a, b, c);
-                if (f.IsQuad)
+                if (f.Length == 4)
                 {
-                    var d = mesh.Vertices[f.D];
+                    var d = mesh.VertexAt(f[3]);
                     area += TriangleArea(a, c, d);
                 }
             }
             return area;
         }
 
-        private static double TriangleArea(Point3f a, Point3f b, Point3f c)
+        private static double TriangleArea(Point a, Point b, Point c)
         {
-            var v1 = new Vector3d(b.X - a.X, b.Y - a.Y, b.Z - a.Z);
-            var v2 = new Vector3d(c.X - a.X, c.Y - a.Y, c.Z - a.Z);
-            return 0.5 * Vector3d.CrossProduct(v1, v2).Length;
+            var v1 = Vector.ByCoordinates(b.X - a.X, b.Y - a.Y, b.Z - a.Z);
+            var v2 = Vector.ByCoordinates(c.X - a.X, c.Y - a.Y, c.Z - a.Z);
+            var cross = Vector.Cross(v1, v2);
+            return 0.5 * cross.Length;
         }
     }
 }

@@ -1,17 +1,17 @@
 using System.Collections.Generic;
-using Grasshopper.Kernel.Types;
+using System.Drawing;
 
 namespace DynaFluxCore
 {
     /// <summary>
-    /// Container for legend metadata passed between Grasshopper components.
+    /// Container for legend metadata passed between visualization hosts.
     /// </summary>
     public class FluxLegend
     {
         /// <summary>
-        /// Colors aligned with the Legend entries. Each item should be a GH_Colour wrapping an RGB value.
+        /// Colors aligned with the Legend entries.
         /// </summary>
-        public List<GH_Colour> Colors { get; set; } = new();
+        public List<Color> Colors { get; set; } = new();
 
         /// <summary>
         /// Legend labels or numeric values paired with Colors. Values should be string or double.

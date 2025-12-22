@@ -3,7 +3,7 @@ using FluxConstructionCore = DynaFluxCore.FluxConstruction;
 using FluxFenestrationConstructionCore = DynaFluxCore.FluxFenestrationConstruction;
 using FluxMaterialCore = DynaFluxCore.FluxMaterial;
 
-namespace DynaFlux.Nodes;
+namespace DynaFlux.Build;
 
 public static class FluxConstruction
 {
@@ -66,5 +66,70 @@ public static class FluxConstruction
 
         construction.CalculateScTotal(construction.Sc1, sc2);
         return construction;
+    }
+
+    /// <summary>
+    /// Deconstructs a FluxConstruction into its basic properties (extension method).
+    /// </summary>
+    /// <param name="Construction">Construction to deconstruct.</param>
+    /// <param name="Id">Construction identifier.</param>
+    /// <param name="Name">Construction name.</param>
+    /// <param name="FluxMaterials">Layer materials.</param>
+    /// <param name="Uvalue">Overall U-value.</param>
+    public static void Deconstruct(this FluxConstructionCore Construction, out string Id, out string Name, out List<FluxMaterialCore> FluxMaterials, out double Uvalue)
+    {
+        if (Construction == null)
+        {
+            Id = string.Empty;
+            Name = string.Empty;
+            FluxMaterials = new List<FluxMaterialCore>();
+            Uvalue = 0;
+            return;
+        }
+
+        Id = Construction.Id;
+        Name = Construction.Name;
+        FluxMaterials = Construction.FluxMaterials ?? new List<FluxMaterialCore>();
+        Uvalue = Construction.Uvalue;
+    }
+
+    /// <summary>
+    /// Returns the construction identifier.
+    /// </summary>
+    /// <param name="Construction">Construction instance.</param>
+    /// <returns>Id or empty string when null.</returns>
+    public static string Id(FluxConstructionCore Construction)
+    {
+        return Construction?.Id ?? string.Empty;
+    }
+
+    /// <summary>
+    /// Returns the construction name.
+    /// </summary>
+    /// <param name="Construction">Construction instance.</param>
+    /// <returns>Name or empty string when null.</returns>
+    public static string Name(FluxConstructionCore Construction)
+    {
+        return Construction?.Name ?? string.Empty;
+    }
+
+    /// <summary>
+    /// Returns the construction layer materials.
+    /// </summary>
+    /// <param name="Construction">Construction instance.</param>
+    /// <returns>List of materials (empty list when null).</returns>
+    public static List<FluxMaterialCore> FluxMaterials(FluxConstructionCore Construction)
+    {
+        return Construction?.FluxMaterials ?? new List<FluxMaterialCore>();
+    }
+
+    /// <summary>
+    /// Returns the construction overall U-value.
+    /// </summary>
+    /// <param name="Construction">Construction instance.</param>
+    /// <returns>U-value or 0 when null.</returns>
+    public static double Uvalue(FluxConstructionCore Construction)
+    {
+        return Construction?.Uvalue ?? 0.0;
     }
 }

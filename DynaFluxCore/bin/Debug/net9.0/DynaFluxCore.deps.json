@@ -8,18 +8,14 @@
     ".NETCoreApp,Version=v9.0": {
       "DynaFluxCore/1.0.0": {
         "dependencies": {
-          "Grasshopper": "8.0.23304.9001",
           "Newtonsoft.Json": "13.0.4",
-          "RhinoCommon": "8.0.23304.9001",
-          "System.Text.Json": "9.0.10"
+          "System.Text.Json": "9.0.10",
+          "DynamoCore": "3.3.0.6316",
+          "DynamoServices": "3.3.0.6316",
+          "ProtoGeometry": "3.0.0.5365"
         },
         "runtime": {
           "DynaFluxCore.dll": {}
-        }
-      },
-      "Grasshopper/8.0.23304.9001": {
-        "dependencies": {
-          "RhinoCommon": "8.0.23304.9001"
         }
       },
       "Newtonsoft.Json/13.0.4": {
@@ -30,8 +26,31 @@
           }
         }
       },
-      "RhinoCommon/8.0.23304.9001": {},
-      "System.Text.Json/9.0.10": {}
+      "System.Text.Json/9.0.10": {},
+      "DynamoCore/3.3.0.6316": {
+        "runtime": {
+          "DynamoCore.dll": {
+            "assemblyVersion": "3.3.0.6316",
+            "fileVersion": "3.3.0.6316"
+          }
+        }
+      },
+      "DynamoServices/3.3.0.6316": {
+        "runtime": {
+          "DynamoServices.dll": {
+            "assemblyVersion": "3.3.0.6316",
+            "fileVersion": "3.3.0.6316"
+          }
+        }
+      },
+      "ProtoGeometry/3.0.0.5365": {
+        "runtime": {
+          "ProtoGeometry.dll": {
+            "assemblyVersion": "3.0.0.5365",
+            "fileVersion": "3.0.0.5365"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -40,13 +59,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Grasshopper/8.0.23304.9001": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-L1Cse6nAxryzcZ7jsu3WzBiG9BYtgYsaNbRV+p55N+THKTFGmXx1PdBbiWtuxK9kB4jyuLVpeV8XBiYlSGA1Vw==",
-      "path": "grasshopper/8.0.23304.9001",
-      "hashPath": "grasshopper.8.0.23304.9001.nupkg.sha512"
-    },
     "Newtonsoft.Json/13.0.4": {
       "type": "package",
       "serviceable": true,
@@ -54,19 +66,27 @@
       "path": "newtonsoft.json/13.0.4",
       "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
     },
-    "RhinoCommon/8.0.23304.9001": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-hWuqXjcj/eb1/z8+bml4Bav/8Oug2p6t0mAVf37GhX9sP+M1aYNO9FappqeN8oefcIBkLBmAzr46DYNhTxFAGQ==",
-      "path": "rhinocommon/8.0.23304.9001",
-      "hashPath": "rhinocommon.8.0.23304.9001.nupkg.sha512"
-    },
     "System.Text.Json/9.0.10": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-XM02ZBnzxk7Ti6l9YRy8Bp639wANqJzJzw4W4VYiCh+HXY9hBOWkGB4k89OLP/s/RxgM02P4a/mWcJTgFiLf1Q==",
       "path": "system.text.json/9.0.10",
       "hashPath": "system.text.json.9.0.10.nupkg.sha512"
+    },
+    "DynamoCore/3.3.0.6316": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DynamoServices/3.3.0.6316": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ProtoGeometry/3.0.0.5365": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

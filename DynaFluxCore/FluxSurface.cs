@@ -1,4 +1,4 @@
-using Rhino.Geometry;
+using Autodesk.DesignScript.Geometry;
 
 
 namespace DynaFluxCore
@@ -70,50 +70,50 @@ namespace DynaFluxCore
         /// </summary>
         public void CalculateOrientation()
         {
-            if (Geometry == null || !Geometry.IsValid || Geometry.Faces.Count == 0)
+            if (Geometry == null || Geometry.VertexCount == 0 || Geometry.FaceCount == 0)
             {
                 Orientation = new FluxOrientation
                 {
                     Id = "Unknown",
                     Name = "Unknown",
-                    Normal = Vector3d.ZAxis
+                    Normal = Vector.ZAxis
                 };
                 return;
             }
 
             // Compute average face normal
-            Vector3d avgNormal = Vector3d.Zero;
+            Vector avgNormal = Vector.ByCoordinates(0, 0, 0);
             int validFaces = 0;
 
-            for (int i = 0; i < Geometry.Faces.Count; i++)
+            for (int i = 0; i < Geometry.FaceCount; i++)
             {
-                var face = Geometry.Faces[i];
-                if (!face.IsValid(Geometry.Vertices.Count)) continue;
+                var face = Geometry.GetFaceIndices(i);
+                if (face == null || face.Length < 3) continue;
 
-                var a = Geometry.Vertices[face.A];
-                var b = Geometry.Vertices[face.B];
-                var c = Geometry.Vertices[face.C];
+                var a = Geometry.VertexAt(face[0]);
+                var b = Geometry.VertexAt(face[1]);
+                var c = Geometry.VertexAt(face[2]);
 
-                var v1 = new Vector3d(b.X - a.X, b.Y - a.Y, b.Z - a.Z);
-                var v2 = new Vector3d(c.X - a.X, c.Y - a.Y, c.Z - a.Z);
-                var normal = Vector3d.CrossProduct(v1, v2);
+                var v1 = Vector.ByCoordinates(b.X - a.X, b.Y - a.Y, b.Z - a.Z);
+                var v2 = Vector.ByCoordinates(c.X - a.X, c.Y - a.Y, c.Z - a.Z);
+                var normal = Vector.Cross(v1, v2);
 
                 if (normal.Length > 0)
                 {
-                    normal.Unitize();
-                    avgNormal += normal;
+                    normal = normal.Normalize();
+                    avgNormal = Vector.Add(avgNormal, normal);
                     validFaces++;
                 }
             }
 
             if (validFaces > 0)
             {
-                avgNormal /= validFaces;
-                avgNormal.Unitize();
+                avgNormal = Vector.Divide(avgNormal, validFaces);
+                avgNormal = avgNormal.Normalize();
             }
             else
             {
-                avgNormal = Vector3d.ZAxis; // fallback
+                avgNormal = Vector.ZAxis; // fallback
             }
 
             // Determine orientation name based on dominant direction
@@ -127,7 +127,7 @@ namespace DynaFluxCore
             };
         }
 
-        private static string GetOrientationName(Vector3d normal)
+        private static string GetOrientationName(Vector normal)
         {
             // Determine primary direction based on normal vector
             var absX = System.Math.Abs(normal.X);
@@ -155,7 +155,7 @@ namespace DynaFluxCore
             }
         }
 
-        public void SetArea(GeometryBase geometry)
+        public void SetArea(Mesh geometry)
         {
             if (geometry is null)
             {
@@ -163,13 +163,30 @@ namespace DynaFluxCore
                 return;
             }
 
-            Area = geometry switch
+            // DesignScript Mesh doesn't expose AreaMassProperties; compute by triangulating faces
+            double area = 0d;
+            for (int i = 0; i < geometry.FaceCount; i++)
             {
-                Mesh mesh => AreaMassProperties.Compute(mesh)?.Area ?? 0d,
-                Brep brep => AreaMassProperties.Compute(brep)?.Area ?? 0d,
-                Surface surface => AreaMassProperties.Compute(surface)?.Area ?? 0d,
-                _ => 0d
-            };
+                var face = geometry.GetFaceIndices(i);
+                if (face == null || face.Length < 3) continue;
+
+                var a = geometry.VertexAt(face[0]);
+                var b = geometry.VertexAt(face[1]);
+                var c = geometry.VertexAt(face[2]);
+
+                area += TriangleArea(a, b, c);
+
+                }
+
+            Area = area;
+        }
+
+        private static double TriangleArea(Point a, Point b, Point c)
+        {
+            var v1 = Vector.ByCoordinates(b.X - a.X, b.Y - a.Y, b.Z - a.Z);
+            var v2 = Vector.ByCoordinates(c.X - a.X, c.Y - a.Y, c.Z - a.Z);
+            var cross = Vector.Cross(v1, v2);
+            return 0.5 * cross.Length;
         }
     }
 }

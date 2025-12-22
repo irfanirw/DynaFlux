@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj": {}
+    "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFluxCore\\DynaFluxCore.csproj": {}
   },
   "projects": {
-    "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj": {
+    "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFluxCore\\DynaFluxCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj",
+        "projectUniqueName": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFluxCore\\DynaFluxCore.csproj",
         "projectName": "DynaFluxCore",
-        "projectPath": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/DynaFluxCore.csproj",
-        "packagesPath": "/Users/irfan/.nuget/packages/",
-        "outputPath": "/Users/irfan/Documents/Learn/GitHub/DynaFlux/DynaFluxCore/obj/",
+        "projectPath": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFluxCore\\DynaFluxCore.csproj",
+        "packagesPath": "C:\\Users\\iirwanuddin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFluxCore\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
-          "/Users/irfan/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\iirwanuddin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net48",
@@ -55,10 +55,6 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "DynamoVisualProgramming.DynamoServices": {
-              "target": "Package",
-              "version": "[3.2.1.5366, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
@@ -87,6 +83,10 @@
             {
               "name": "Microsoft.NETCore.App.Ref",
               "version": "[7.0.20, 7.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.20, 7.0.20]"
             }
           ],
           "frameworkReferences": {
@@ -94,15 +94,11 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307\\RuntimeIdentifierGraph.json"
         },
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "DynamoVisualProgramming.DynamoServices": {
-              "target": "Package",
-              "version": "[3.2.1.5366, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
@@ -128,15 +124,11 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         },
         "net48": {
           "targetAlias": "net48",
           "dependencies": {
-            "DynamoVisualProgramming.DynamoServices": {
-              "target": "Package",
-              "version": "[3.2.1.5366, )"
-            },
             "Microsoft.NETFramework.ReferenceAssemblies": {
               "suppressParent": "All",
               "target": "Package",
@@ -152,7 +144,7 @@
               "version": "[9.0.10, )"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307\\RuntimeIdentifierGraph.json"
         }
       }
     }

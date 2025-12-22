@@ -5,11 +5,24 @@
     <Nullable>enable</Nullable>
     <AssemblyName>DynaFlux</AssemblyName>
     <RootNamespace>DynaFlux</RootNamespace>
+    <!-- See DynaFluxCore.csproj for notes about enabling USE_DESIGNSCRIPT locally when your environment contains all required native dependencies and matching assembly versions -->
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="DynaFlux">
       <HintPath>..\DynaFluxCore\bin\Debug\net48\DynaFluxCore.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="ProtoGeometry">
+      <HintPath>..\libs\ProtoGeometry.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="DynamoServices">
+      <HintPath>..\libs\DynamoServices.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="DynamoCore">
+      <HintPath>..\libs\DynamoCore.dll</HintPath>
       <Private>true</Private>
     </Reference>
   </ItemGroup>
