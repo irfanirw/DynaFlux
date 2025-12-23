@@ -7,6 +7,7 @@ namespace DynaFlux.Build;
 
 public static class FluxConstruction
 {
+
     /// <summary>
     /// Creates an opaque FluxConstruction from its properties.
     /// </summary>
@@ -19,6 +20,7 @@ public static class FluxConstruction
         string id,
         string name,
         List<FluxMaterialCore> fluxMaterials,
+        >
         double uvalue)
     {
         var construction = new FluxConstructionCore
@@ -47,7 +49,7 @@ public static class FluxConstruction
     /// <param name="uvalue">Overall U-value.</param>
     /// <param name="sc2">Shading coefficient 2.</param>
     /// <returns>Configured FluxConstruction.</returns>
-    public static FluxConstructionCore FenestrationByProperties(string id, string name, double uvalue, double sc2)
+    public static FluxFenestrationConstructionCore GetFenestrationByProperties(string id, string name, double uvalue, double sc2)
     {
         var construction = new FluxFenestrationConstructionCore
         {
@@ -98,7 +100,7 @@ public static class FluxConstruction
     /// </summary>
     /// <param name="Construction">Construction instance.</param>
     /// <returns>Id or empty string when null.</returns>
-    public static string Id(FluxConstructionCore Construction)
+    public static string GetId(FluxConstructionCore Construction)
     {
         return Construction?.Id ?? string.Empty;
     }
@@ -108,7 +110,7 @@ public static class FluxConstruction
     /// </summary>
     /// <param name="Construction">Construction instance.</param>
     /// <returns>Name or empty string when null.</returns>
-    public static string Name(FluxConstructionCore Construction)
+    public static string GetName(FluxConstructionCore Construction)
     {
         return Construction?.Name ?? string.Empty;
     }
@@ -118,7 +120,7 @@ public static class FluxConstruction
     /// </summary>
     /// <param name="Construction">Construction instance.</param>
     /// <returns>List of materials (empty list when null).</returns>
-    public static List<FluxMaterialCore> FluxMaterials(FluxConstructionCore Construction)
+    public static List<FluxMaterialCore> GetFluxMaterials(FluxConstructionCore Construction)
     {
         return Construction?.FluxMaterials ?? new List<FluxMaterialCore>();
     }
@@ -128,7 +130,7 @@ public static class FluxConstruction
     /// </summary>
     /// <param name="Construction">Construction instance.</param>
     /// <returns>U-value or 0 when null.</returns>
-    public static double Uvalue(FluxConstructionCore Construction)
+    public static double GetUvalue(FluxConstructionCore Construction)
     {
         return Construction?.Uvalue ?? 0.0;
     }
