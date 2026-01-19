@@ -1,55 +1,95 @@
+using System;
 using System.Collections.Generic;
-using FluxConstructionCore = DynaFluxCore.FluxConstruction;
-using FluxFenestrationConstructionCore = DynaFluxCore.FluxFenestrationConstruction;
-using FluxMaterialCore = DynaFluxCore.FluxMaterial;
+using System.Linq;
 
-namespace DynaFlux.Build;
-
-public static class FluxConstruction
+namespace DynaFlux.Build
 {
-    public static string Id { get; set; } = string.Empty;
-    public static string Name { get; set; } = string.Empty;
-    public static List<FluxMaterialCore> FluxMaterials { get; set; } = new List<FluxMaterialCore>();
-    public static double Uvalue { get; set; } = 0.0;
     /// <summary>
-    /// Creates an opaque FluxConstruction from its properties.
+    /// Represents a building construction assembly (wall, roof, floor, etc.) with multiple material layers.
+    /// Based on Singapore BCA ETTV standard.
     /// </summary>
-    /// <param name="id">Construction identifier.</param>
-    /// <param name="name">Construction name.</param>
-    /// <param name="fluxMaterials">Layer materials.</param>
-    /// <param name="uvalue">Overall U-value.</param>
-    /// <returns>Configured FluxConstruction.</returns>
-    public static FluxConstructionCore OpaqueByProperties(
-        string id,
-        string name,
-        List<FluxMaterialCore> fluxMaterials,
-        double uvalue)
+    public class FluxConstruction
     {
-        var construction = new FluxConstructionCore
-        {
-            Id = id,
-            Name = name,
-            FluxMaterials = fluxMaterials ?? new List<FluxMaterialCore>(),
-            // set a sensible default; may be overwritten below
-            Uvalue = uvalue
-        };
+        /// <summary>
+        /// Unique identifier for the construction
+        /// </summary>
+        public string Id { get; set; }
 
-        // If caller provided a non-positive uvalue (e.g. 0) compute it from materials
-        if (uvalue <= 0.0)
+        /// <summary>
+        /// Name of the construction assembly
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// List of materials in the construction (from exterior to interior)
+        /// </summary>
+        public List<FluxMaterial> Materials { get; set; }
+
+        /// <summary>
+        /// Overall U-value (thermal transmittance) in W/(m²·K)
+        /// </summary>
+        public double Uvalue { get; private set; }
+
+        /// <summary>
+        /// Creates a new FluxConstruction
+        /// </summary>
+        /// <param name="id">Unique identifier</param>
+        /// <param name="name">Construction name</param>
+        /// <param name="materials">List of materials from exterior to interior</param>
+        public FluxConstruction(string id, string name, List<FluxMaterial> materials)
         {
-            construction.Uvalue = DynaFluxCore.FluxUvalueCalculator.ComputeUValue(construction.FluxMaterials);
+            Id = id;
+            Name = name;
+            Materials = materials ?? new List<FluxMaterial>();
+            Uvalue = ComputeUvalue(Materials);
         }
 
-        return construction;
-    }
+        /// <summary>
+        /// Computes the U-value (thermal transmittance) based on materials.
+        /// U = 1 / (Rsi + Σ(R_materials) + Rse)
+        /// Based on Singapore BCA ETTV calculation methodology
+        /// </summary>
+        /// <param name="materials">List of materials in the construction</param>
+        /// <returns>U-value in W/(m²·K)</returns>
+        public double ComputeUvalue(List<FluxMaterial> materials)
+        {
+            if (materials == null || materials.Count == 0)
+            {
+                return 0.0;
+            }
 
-    /// <summary>
-    /// Creates a fenestration FluxConstruction from its properties.
-    /// </summary>
-    /// <param name="id">Construction identifier.</param>
-    /// <param name="name">Construction name.</param>
-    /// <param name="uvalue">Overall U-value.</param>
-    /// <param name="sc1">Shading coefficient 1.</param>
-    /// <param name="sc2">Shading coefficient 2.</param>
-    /// <returns>Configured FluxConstruction.</returns>
+            // Surface resistances based on BCA guidelines
+            // Internal surface resistance (Rsi) for vertical surfaces
+            double Rsi = 0.13; // m²·K/W
+
+            // External surface resistance (Rse) for vertical surfaces
+            double Rse = 0.04; // m²·K/W
+
+            // Sum of thermal resistances of all material layers
+            double totalMaterialResistance = materials.Sum(m => m.GetThermalResistance());
+
+            // Total thermal resistance
+            double totalResistance = Rsi + totalMaterialResistance + Rse;
+
+            // U-value is the inverse of total thermal resistance
+            if (totalResistance > 0)
+            {
+                Uvalue = 1.0 / totalResistance;
+            }
+            else
+            {
+                Uvalue = 0.0;
+            }
+
+            return Uvalue;
+        }
+
+        /// <summary>
+        /// Updates the U-value calculation
+        /// </summary>
+        public void UpdateUvalue()
+        {
+            Uvalue = ComputeUvalue(Materials);
+        }
+    }
 }

@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="DynaFlux">
-      <HintPath>..\DynaFluxCore\bin\Debug\net48\DynaFluxCore.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
     <Reference Include="ProtoGeometry">
       <HintPath>..\libs\ProtoGeometry.dll</HintPath>
       <Private>true</Private>
@@ -25,6 +21,10 @@
       <HintPath>..\libs\DynamoCore.dll</HintPath>
       <Private>true</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Nodes\" />
   </ItemGroup>
 
   <!--

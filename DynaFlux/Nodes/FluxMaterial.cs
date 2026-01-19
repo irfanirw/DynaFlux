@@ -1,35 +1,50 @@
-using FluxMaterialCore = DynaFluxCore.FluxMaterial;
+using System;
 
-namespace DynaFlux.Build;
-
-public static class FluxMaterial
+namespace DynaFlux.Build
 {
     /// <summary>
-    public static string Name { get; set; }
-    public static double ThermalConductivity { get; set; }
-    public static double Thickness { get; set; }
-
-    /// Creates a FluxMaterial from its basic properties.
+    /// Represents a building material with thermal properties for ETTV calculations.
+    /// Based on Singapore BCA ETTV standard.
     /// </summary>
-    /// <param name="name">Material name.</param>
-    /// <param name="thermalConductivity">Thermal conductivity.</param>
-    /// <param name="thickness">Material thickness.</param>
-    /// <returns>Configured FluxMaterial.</returns>
-    public static FluxMaterialCore ByProperties(string name, double thermalConductivity, double thickness)
+    public class FluxMaterial
     {
-        return new FluxMaterialCore
-        {
-            Name = name,
-            ThermalConductivity = thermalConductivity,
-            Thickness = thickness
-        };
-    }
+        /// <summary>
+        /// Name of the material
+        /// </summary>
+        public string Name { get; set; }
 
-    /// <summary>
-    /// Deconstructs a FluxMaterial into its basic properties (extension method).
-    /// </summary>
-    /// <param name="Material">Material to deconstruct.</param>
-    /// <param name="Name">Material name.</param>
-    /// <param name="ThermalConductivity">Thermal conductivity.</param>
-    /// <param name="Thickness">Material thickness.</param>
+        /// <summary>
+        /// Thermal conductivity in W/(m·K)
+        /// </summary>
+        public double ThermalConductivity { get; set; }
+
+        /// <summary>
+        /// Material thickness in millimeters
+        /// </summary>
+        public double Thickness { get; set; }
+
+        /// <summary>
+        /// Creates a new FluxMaterial
+        /// </summary>
+        /// <param name="name">Material name</param>
+        /// <param name="thermalConductivity">Thermal conductivity in W/(m·K)</param>
+        /// <param name="thickness">Thickness in millimeters</param>
+        public FluxMaterial(string name, double thermalConductivity, double thickness)
+        {
+            Name = name;
+            ThermalConductivity = thermalConductivity;
+            Thickness = thickness;
+        }
+
+        /// <summary>
+        /// Calculate thermal resistance (R-value) of the material in m²·K/W
+        /// R = thickness / thermal conductivity
+        /// </summary>
+        public double GetThermalResistance()
+        {
+            // Convert thickness from mm to m
+            double thicknessInMeters = Thickness / 1000.0;
+            return thicknessInMeters / ThermalConductivity;
+        }
+    }
 }

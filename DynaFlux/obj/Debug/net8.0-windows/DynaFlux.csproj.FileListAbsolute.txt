@@ -51,12 +51,9 @@
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\DynaFlux.deps.json
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\DynaFlux.dll
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\DynaFlux.pdb
-C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\DynaFluxCore.dll
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\DynamoCore.dll
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\DynamoServices.dll
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\ProtoGeometry.dll
-C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
-C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Debug\net8.0-windows\DynaFluxCore.pdb
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net8.0-windows\DynaFlux.csproj.AssemblyReference.cache
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net8.0-windows\DynaFlux.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net8.0-windows\DynaFlux.AssemblyInfoInputs.cache
