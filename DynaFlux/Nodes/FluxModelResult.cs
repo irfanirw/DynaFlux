@@ -114,7 +114,7 @@ namespace DynaFlux.Result
 
                     // Calculate fenestration radiation heat gain
                     // Formula: 211 × Σ(Afi × SCfi) × CF / Ao
-                    double fenestrationAreaSCSum = fenestrationSurfaces.Sum(s => s.Area * (s.Construction?.ShadingCoefficient ?? 1.0));
+                    double fenestrationAreaSCSum = fenestrationSurfaces.Sum(s => s.Area * (s.Construction?.ScTot ?? 1.0));
                     if (totalArea > 0)
                     {
                         orientationResult.FenestrationRadiationHeatGain = 211.0 * fenestrationAreaSCSum * orientation.CorrectionFactor / totalArea;

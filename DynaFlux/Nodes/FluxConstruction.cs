@@ -32,10 +32,21 @@ namespace DynaFlux.Build
         public double Uvalue { get; set; }
 
         /// <summary>
-        /// Shading coefficient for solar heat gain calculations
-        /// Typical range: 0.0-1.0 (0 = fully shaded, 1 = no shading)
+        /// Shading coefficient 1 for solar heat gain calculations
         /// </summary>
-        public double ShadingCoefficient { get; set; }
+        public double Sc1 { get; set; }
+
+        /// <summary>
+        /// Shading coefficient 2 for solar heat gain calculations
+        /// Default = 1.0
+        /// </summary>
+        public double Sc2 { get; set; }
+
+        /// <summary>
+        /// Total shading coefficient (ScTot = Sc1 * Sc2)
+        /// Typical range: 0.0-1.0 (0 = fully shaded, 1 consider as no shading)
+        /// </summary>
+        public double ScTot { get; set; }
 
         /// <summary>
         /// Creates a new FluxConstruction
@@ -55,83 +66,39 @@ namespace DynaFlux.Build
         /// <param name="name">Construction name</param>
         /// <param name="materials">List of materials from exterior to interior (optional - if provided, Uvalue will be computed)</param>
         /// <param name="uvalue">Manual U-value override (optional)</param>
-        /// <param name="shadingCoefficient">Shading coefficient for fenestration (optional, default = 1.0)</param>
-        public FluxConstruction(string id, string name, List<FluxMaterial>? materials = null, double uvalue = 0.0, double shadingCoefficient = 1.0)
+        /// <param name="sc1">Shading coefficient 1 (optional, default = 1.0)</param>
+        /// <param name="sc2">Shading coefficient 2 (optional, default = 1.0)</param>
+        public FluxConstruction(string id, string name, List<FluxMaterial>? materials = null, double uvalue = 0.0, double sc1 = 1.0, double sc2 = 1.0)
         {
-            // Set Type based on whether ShadingCoefficient is supplied (default is 1.0)
-            Type = (shadingCoefficient == 1.0) ? "Opaque" : "Fenestration";
             Id = id;
             Name = name;
             Materials = materials ?? new List<FluxMaterial>();
-            ShadingCoefficient = shadingCoefficient;
-            
+
+            Sc1 = sc1;
+            Sc2 = sc2;
+            ScTot = Sc1 * Sc2;
+
+            // Set Type based on total shading coefficient (default is 1.0)
+            Type = (ScTot == 1.0) ? "Opaque" : "Fenestration";
+
             bool hasMaterials = materials != null && materials.Count > 0;
             bool hasUvalue = uvalue > 0.0;
-            
-            if (hasMaterials && hasUvalue)
+
+            if (hasUvalue)
             {
-            // Both supplied - Uvalue input overrides
-            Uvalue = uvalue;
-            }
-            else if (hasMaterials && !hasUvalue)
-            {
-            // Materials supplied but no Uvalue - compute from materials
-            Uvalue = ComputeUvalue(Materials);
-            }
-            else if (!hasMaterials && hasUvalue)
-            {
-            // Uvalue supplied but no materials - use Uvalue input
-            Uvalue = uvalue;
-            }
-            else
-            {
-            // Neither supplied - set to 0 and warn user
-            Uvalue = 0.0;
-            Console.WriteLine($"Warning: FluxConstruction '{name}' created without materials or U-value. U-value set to 0.0.");
-            }
-            Id = id;
-            Name = name;
-            Materials = materials ?? new List<FluxMaterial>();
-            ShadingCoefficient = shadingCoefficient;
-            // Only compute Uvalue if materials are provided
-            if (materials != null && materials.Count > 0)
-            {
-            // If uvalue is provided, use it directly; otherwise compute from materials
-            if (uvalue > 0.0)
-            {
+                // Uvalue input overrides
                 Uvalue = uvalue;
             }
-            else
+            else if (hasMaterials)
             {
-                // Materials provided but no uvalue - compute from materials
+                // Materials supplied but no Uvalue - compute from materials
                 Uvalue = ComputeUvalue(Materials);
             }
-            }
             else
             {
-            // If no materials provided but uvalue is supplied, use the uvalue input
-            Uvalue = uvalue;
-            }
-            Id = id;
-            Name = name;
-            Materials = materials ?? new List<FluxMaterial>();
-            ShadingCoefficient = shadingCoefficient;
-            // Only compute Uvalue if materials are provided
-            if (materials != null && materials.Count > 0)
-            {
-                // If uvalue is provided, use it directly; otherwise compute from materials
-                if (uvalue > 0.0)
-                {
-                    Uvalue = uvalue;
-                }
-                else
-                {
-                    Uvalue = ComputeUvalue(Materials);
-                }
-            }
-            else
-            {
+                // Neither supplied - set to 0 and warn user
                 Uvalue = 0.0;
+                Console.WriteLine($"Warning: FluxConstruction '{name}' created without materials or U-value. U-value set to 0.0.");
             }
         }
 
