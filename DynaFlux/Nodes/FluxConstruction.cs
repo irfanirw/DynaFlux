@@ -43,8 +43,23 @@ namespace DynaFlux.Build
         /// <param name="id">Unique identifier</param>
         /// <param name="name">Construction name</param>
         /// <param name="materials">List of materials from exterior to interior (optional - if provided, Uvalue will be computed)</param>
+        /// <summary>
+        /// Type of construction element: "Opaque" or "Fenestration"
+        /// </summary>
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Creates a new FluxConstruction
+        /// </summary>
+        /// <param name="id">Unique identifier</param>
+        /// <param name="name">Construction name</param>
+        /// <param name="materials">List of materials from exterior to interior (optional - if provided, Uvalue will be computed)</param>
+        /// <param name="uvalue">Manual U-value override (optional)</param>
+        /// <param name="shadingCoefficient">Shading coefficient for fenestration (optional, default = 1.0)</param>
         public FluxConstruction(string id, string name, List<FluxMaterial>? materials = null, double uvalue = 0.0, double shadingCoefficient = 1.0)
         {
+            // Set Type based on whether ShadingCoefficient is supplied (default is 1.0)
+            Type = (shadingCoefficient == 1.0) ? "Opaque" : "Fenestration";
             Id = id;
             Name = name;
             Materials = materials ?? new List<FluxMaterial>();
