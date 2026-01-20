@@ -26,6 +26,12 @@ namespace DynaFlux.Build
         public double Angle { get; set; }
 
         /// <summary>
+        /// Correction factor based on orientation
+        /// Used in BCA ETTV calculations for orientation-specific adjustments
+        /// </summary>
+        public double CorrectionFactor { get; private set; }
+
+        /// <summary>
         /// Creates a new FluxOrientation
         /// </summary>
         /// <param name="name">Orientation name</param>
@@ -36,10 +42,13 @@ namespace DynaFlux.Build
             Name = name;
             Normal = normal;
             Angle = angle;
+            CorrectionFactor = GetCorrectionFactor(name);
         }
 
         /// <summary>
         /// Creates a FluxOrientation from a surface normal vector
+        /// Coordinate system: X(1,0,0) = East, Y(0,1,0) = North, Z(0,0,1) = Up
+        /// Angle measured clockwise from North: North = 0°, East = 90°, South = 180°, West = 270°
         /// </summary>
         /// <param name="normal">Surface normal vector</param>
         /// <returns>FluxOrientation with calculated angle and name</returns>
@@ -50,8 +59,12 @@ namespace DynaFlux.Build
                 throw new ArgumentNullException(nameof(normal));
             }
 
-            // Calculate angle from North (assuming Z is up, X is East, Y is North)
-            // Angle is measured clockwise from North
+            // Calculate angle from North
+            // Y(0,1,0) = North = 0°
+            // X(1,0,0) = East = 90°
+            // -Y(0,-1,0) = South = 180°
+            // -X(-1,0,0) = West = 270°
+            // Angle measured clockwise from North (Y-axis)
             double angleRadians = Math.Atan2(normal.X, normal.Y);
             double angleDegrees = angleRadians * (180.0 / Math.PI);
             
@@ -121,6 +134,35 @@ namespace DynaFlux.Build
                     return 180.0;
                 default:
                     return 0.0;
+            }
+        }
+
+        /// <summary>
+        /// Gets the correction factor based on orientation name
+        /// Values from BCA ETTV standard (clockwise from North)
+        /// </summary>
+        private static double GetCorrectionFactor(string orientationName)
+        {
+            switch (orientationName)
+            {
+                case "North":
+                    return 0.80;
+                case "NorthEast":
+                    return 0.97;
+                case "East":
+                    return 1.13;
+                case "SouthEast":
+                    return 0.98;
+                case "South":
+                    return 0.83;
+                case "SouthWest":
+                    return 1.06;
+                case "West":
+                    return 1.23;
+                case "NorthWest":
+                    return 1.03;
+                default:
+                    return 1.0;
             }
         }
     }

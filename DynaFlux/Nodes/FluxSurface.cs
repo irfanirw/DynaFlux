@@ -30,18 +30,29 @@ namespace DynaFlux.Build
         public FluxOrientation Orientation { get; set; }
 
         /// <summary>
-        /// Creates a new FluxSurface
+        /// Creates a new FluxSurface with automatic area and orientation assignment
         /// </summary>
         /// <param name="face">Geometric face</param>
         /// <param name="construction">Construction assembly</param>
-        /// <param name="orientation">Surface orientation</param>
-        public FluxSurface(Face face, FluxConstruction construction, FluxOrientation orientation)
+        /// <param name="orientation">Surface orientation (if null, will be automatically derived from face normal)</param>
+        public FluxSurface(Face face, FluxConstruction construction, FluxOrientation orientation = null)
         {
             Face = face ?? throw new ArgumentNullException(nameof(face));
             Construction = construction ?? throw new ArgumentNullException(nameof(construction));
-            Orientation = orientation;
+            
+            // Auto-assign orientation from face normal if not provided
+            if (orientation == null)
+            {
+                var surface = face.SurfaceGeometry();
+                var normal = surface.NormalAtParameter(0.5, 0.5);
+                Orientation = FluxOrientation.FromNormal(normal);
+            }
+            else
+            {
+                Orientation = orientation;
+            }
 
-            // Calculate area from the face
+            // Auto-assign area from the face
             Area = CalculateArea();
         }
 
