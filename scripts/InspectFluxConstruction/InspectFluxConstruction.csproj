@@ -5,6 +5,21 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- Don't enable USE_DESIGNSCRIPT by default here; enable locally if your environment contains matching Dynamo/DesignScript binaries -->
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="ProtoGeometry">
+      <HintPath>..\..\libs\ProtoGeometry.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="DynamoServices">
+      <HintPath>..\..\libs\DynamoServices.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="DynamoCore">
+      <HintPath>..\..\libs\DynamoCore.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
 </Project>

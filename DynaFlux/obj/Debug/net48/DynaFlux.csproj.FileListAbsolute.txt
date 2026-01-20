@@ -3,3 +3,9 @@
 /Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.AssemblyInfoInputs.cache
 /Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.AssemblyInfo.cs
 /Users/irfan/Projects/DynaFlux/DynaFlux/obj/Debug/net48/DynaFlux.csproj.CoreCompileInputs.cache
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net48\DynaFlux.csproj.AssemblyReference.cache
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net48\DynaFlux.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net48\DynaFlux.AssemblyInfoInputs.cache
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net48\DynaFlux.AssemblyInfo.cs
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net48\DynaFlux.csproj.CoreCompileInputs.cache
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Debug\net48\DynaFlux.sourcelink.json

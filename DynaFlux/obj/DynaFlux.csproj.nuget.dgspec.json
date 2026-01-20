@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/irfan/Projects/DynaFlux/DynaFlux/DynaFlux.csproj": {}
+    "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj": {}
   },
   "projects": {
-    "/Users/irfan/Projects/DynaFlux/DynaFlux/DynaFlux.csproj": {
+    "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/irfan/Projects/DynaFlux/DynaFlux/DynaFlux.csproj",
+        "projectUniqueName": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj",
         "projectName": "DynaFlux",
-        "projectPath": "/Users/irfan/Projects/DynaFlux/DynaFlux/DynaFlux.csproj",
-        "packagesPath": "/Users/irfan/.nuget/packages/",
-        "outputPath": "/Users/irfan/Projects/DynaFlux/DynaFlux/obj/",
+        "projectPath": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj",
+        "packagesPath": "C:\\Users\\iirwanuddin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/irfan/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\iirwanuddin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0-windows"
@@ -57,11 +57,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.21, 8.0.21]"
+              "version": "[8.0.22, 8.0.22]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.21, 8.0.21]"
+              "version": "[8.0.22, 8.0.22]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.22, 8.0.22]"
             }
           ],
           "frameworkReferences": {
@@ -69,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

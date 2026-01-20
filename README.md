@@ -1,16 +1,83 @@
-# DynaFlux ZeroTouch (Revit 2025)
+# DynaFlux
 
-This repo contains a minimal Dynamo ZeroTouch plugin scaffold targeting Revit 2025.
+DynaFlux is a Dynamo ZeroTouch library for **Singapore BCA ETTV** calculations. It provides reusable node classes to model building envelope assemblies, surface orientations, and to compute ETTV per facade orientation and for the overall model.
 
-## Structure
-- `DynaFlux/DynaFlux.csproj`
-- `DynaFlux/Nodes/Arithmetic.cs` (first node: `Addition`)
+> Target platform: Revit 2025 + Dynamo 3.3 (net8.0-windows)
 
-## Next steps
-1. Add references to Dynamo assemblies (from your Revit 2025 + Dynamo install):
+---
+
+## Features
+- **BCA ETTV-aligned workflow** for opaque and fenestration assemblies
+- Auto-derived **surface area** and **orientation** from geometry
+- **Orientation correction factors** and solar gain factors
+- **Per-orientation ETTV** breakdown and **overall average ETTV**
+
+---
+
+## Core Nodes
+### Build
+- **FluxMaterial** – Material layer with thickness and thermal conductivity
+- **FluxConstruction** – Assembly definition, U-value computation, shading coefficient, and type
+- **FluxSurface** – Geometry + construction + orientation with auto-derived area
+- **FluxOrientation** – Orientation name, angle, correction factor
+- **FluxModel** – Aggregates surfaces, unique orientations, and constructions
+
+### Result
+- **FluxOrientationResult** – ETTV components per orientation
+- **FluxModelResult** – ETTV per orientation + average ETTV
+
+---
+
+## ETTV Formula (BCA)
+
+$$
+	ext{ETTV} = \frac{12\sum(A_{w}U_{w})}{A_{w}} + \frac{3.4\sum(A_{f}U_{f})}{A_{o}} + \frac{211\sum(A_{f}SC_{f})\,CF}{A_{o}}
+$$
+
+Where:
+- $A_{w}$ = opaque wall area
+- $A_{f}$ = fenestration area
+- $A_{o} = A_{w} + A_{f}$ = overall envelope area
+- $U_{w}$ / $U_{f}$ = U-value of wall / fenestration
+- $SC_{f}$ = shading coefficient for fenestration
+- $CF$ = orientation correction factor
+
+---
+
+## Project Structure
+- **DynaFlux/DynaFlux.csproj** – ZeroTouch library
+- **DynaFlux/Nodes/** – Core classes and ETTV nodes
+- **libs/** – Dynamo/ProtoGeometry references
+- **scripts/** – Small inspection apps for local testing
+
+---
+
+## Build
+1. Open **DynaFlux.sln** in Visual Studio 2022+
+2. Ensure Dynamo assemblies are referenced:
    - `DynamoCore.dll`
    - `DynamoServices.dll`
-2. Build the project.
-3. Copy the resulting `DynaFluxCore.dll` to a Dynamo package folder or a location on Dynamo's search path.
+   - `ProtoGeometry.dll`
+3. Build the solution
 
-If you want, tell me where your Revit/Dynamo install lives and I can wire the references directly.
+The build outputs:
+- `DynaFlux/bin/Debug/net8.0-windows/DynaFlux.dll`
+
+---
+
+## Usage (Dynamo)
+1. Load `DynaFlux.dll` into Dynamo (package folder or Load Library)
+2. Create materials and constructions
+3. Create surfaces from geometry
+4. Build a `FluxModel`
+5. Compute results with `FluxModelResult`
+
+---
+
+## Reference
+- Singapore BCA RETV Standard (ref: `DynaFlux/ref/retv.pdf`)
+
+---
+
+## License
+Internal project use (update if a public license is required)
