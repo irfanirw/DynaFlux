@@ -86,12 +86,17 @@ namespace DynaFlux.Build
 
             if (hasUvalue)
             {
-                // Uvalue input overrides
+                // U-value input takes priority; materials are not used for U-value assignment
                 Uvalue = uvalue;
+                if (hasMaterials)
+                {
+                    Console.WriteLine($"Warning: FluxConstruction '{name}' received both U-value and materials. U-value input takes priority; materials will not be used for U-value calculation.");
+                    Materials = new List<FluxMaterial>();
+                }
             }
             else if (hasMaterials)
             {
-                // Materials supplied but no Uvalue - compute from materials
+                // No U-value provided - compute from materials
                 Uvalue = ComputeUvalue(Materials);
             }
             else

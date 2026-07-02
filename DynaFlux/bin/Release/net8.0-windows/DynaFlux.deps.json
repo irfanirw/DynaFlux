@@ -8,25 +8,35 @@
     ".NETCoreApp,Version=v8.0": {
       "DynaFlux/1.0.0": {
         "dependencies": {
-          "DynaFluxCore": "0.0.0.0"
+          "DynamoCore": "3.3.0.6316",
+          "DynamoServices": "3.3.0.6316",
+          "ProtoGeometry": "3.0.0.5365"
         },
         "runtime": {
           "DynaFlux.dll": {}
         }
       },
-      "DynaFluxCore/0.0.0.0": {
+      "DynamoCore/3.3.0.6316": {
         "runtime": {
-          "DynaFluxCore.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
+          "DynamoCore.dll": {
+            "assemblyVersion": "3.3.0.6316",
+            "fileVersion": "3.3.0.6316"
           }
         }
       },
-      "Newtonsoft.Json/13.0.0.0": {
+      "DynamoServices/3.3.0.6316": {
         "runtime": {
-          "Newtonsoft.Json.dll": {
-            "assemblyVersion": "13.0.0.0",
-            "fileVersion": "13.0.4.30916"
+          "DynamoServices.dll": {
+            "assemblyVersion": "3.3.0.6316",
+            "fileVersion": "3.3.0.6316"
+          }
+        }
+      },
+      "ProtoGeometry/3.0.0.5365": {
+        "runtime": {
+          "ProtoGeometry.dll": {
+            "assemblyVersion": "3.0.0.5365",
+            "fileVersion": "3.0.0.5365"
           }
         }
       }
@@ -38,12 +48,17 @@
       "serviceable": false,
       "sha512": ""
     },
-    "DynaFluxCore/0.0.0.0": {
+    "DynamoCore/3.3.0.6316": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Newtonsoft.Json/13.0.0.0": {
+    "DynamoServices/3.3.0.6316": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ProtoGeometry/3.0.0.5365": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

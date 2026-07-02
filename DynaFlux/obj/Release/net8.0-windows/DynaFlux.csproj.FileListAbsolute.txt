@@ -14,3 +14,20 @@
 /Users/irfan/Projects/DynaFlux/DynaFlux/obj/Release/net8.0-windows/refint/DynaFlux.dll
 /Users/irfan/Projects/DynaFlux/DynaFlux/obj/Release/net8.0-windows/DynaFlux.pdb
 /Users/irfan/Projects/DynaFlux/DynaFlux/obj/Release/net8.0-windows/ref/DynaFlux.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Release\net8.0-windows\DynaFlux.deps.json
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Release\net8.0-windows\DynaFlux.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Release\net8.0-windows\DynaFlux.pdb
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Release\net8.0-windows\DynamoCore.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Release\net8.0-windows\DynamoServices.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\bin\Release\net8.0-windows\ProtoGeometry.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.csproj.AssemblyReference.cache
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.AssemblyInfoInputs.cache
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.AssemblyInfo.cs
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.csproj.CoreCompileInputs.cache
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.sourcelink.json
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.csproj.Up2Date
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\refint\DynaFlux.dll
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\DynaFlux.pdb
+C:\Users\iirwanuddin\OneDrive - Exyte\Documents\GitHub\DynaFlux\DynaFlux\obj\Release\net8.0-windows\ref\DynaFlux.dll
