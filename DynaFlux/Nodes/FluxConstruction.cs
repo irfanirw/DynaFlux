@@ -49,57 +49,62 @@ namespace DynaFlux.Build
         public double ScTot { get; set; }
 
         /// <summary>
-        /// Creates a new FluxConstruction
-        /// </summary>
-        /// <param name="id">Unique identifier</param>
-        /// <param name="name">Construction name</param>
-        /// <param name="materials">List of materials from exterior to interior (optional - if provided, Uvalue will be computed)</param>
-        /// <summary>
         /// Type of construction element: "Opaque" or "Fenestration"
         /// </summary>
         public string Type { get; set; }
 
         /// <summary>
-        /// Creates a new FluxConstruction
+        /// Creates a FluxConstruction with a manually specified U-value.
+        /// Use this when the U-value is already known (e.g. from a datasheet).
         /// </summary>
         /// <param name="id">Unique identifier</param>
         /// <param name="name">Construction name</param>
-        /// <param name="materials">List of materials from exterior to interior (optional - if provided, Uvalue will be computed)</param>
-        /// <param name="uvalue">Manual U-value override (optional)</param>
-        /// <param name="sc1">Shading coefficient 1 (optional, default = 1.0)</param>
-        /// <param name="sc2">Shading coefficient 2 (optional, default = 1.0)</param>
-        public FluxConstruction(string id, string name, List<FluxMaterial>? materials = null, double uvalue = 0.0, double sc1 = 1.0, double sc2 = 1.0)
+        /// <param name="uvalue">Thermal transmittance in W/(m²·K)</param>
+        /// <param name="sc1">Shading coefficient 1 (default = 1.0)</param>
+        /// <param name="sc2">Shading coefficient 2 (default = 1.0)</param>
+        public static FluxConstruction ByUvalue(string id, string name, double uvalue, double sc1 = 1.0, double sc2 = 1.0)
         {
-            Id = id;
-            Name = name;
-            Materials = materials ?? new List<FluxMaterial>();
+            var c = new FluxConstruction();
+            c.Id = id;
+            c.Name = name;
+            c.Materials = new List<FluxMaterial>();
+            c.Uvalue = uvalue;
+            c.Sc1 = sc1;
+            c.Sc2 = sc2;
+            c.ScTot = sc1 * sc2;
+            c.Type = (c.ScTot == 1.0) ? "Opaque" : "Fenestration";
+            return c;
+        }
 
-            Sc1 = sc1;
-            Sc2 = sc2;
-            ScTot = Sc1 * Sc2;
+        /// <summary>
+        /// Creates a FluxConstruction from material layers.
+        /// U-value is automatically computed from the material assembly.
+        /// </summary>
+        /// <param name="id">Unique identifier</param>
+        /// <param name="name">Construction name</param>
+        /// <param name="materials">List of materials from exterior to interior</param>
+        /// <param name="sc1">Shading coefficient 1 (default = 1.0)</param>
+        /// <param name="sc2">Shading coefficient 2 (default = 1.0)</param>
+        public static FluxConstruction ByMaterials(string id, string name, List<FluxMaterial> materials, double sc1 = 1.0, double sc2 = 1.0)
+        {
+            var c = new FluxConstruction();
+            c.Id = id;
+            c.Name = name;
+            c.Materials = materials ?? new List<FluxMaterial>();
+            c.Sc1 = sc1;
+            c.Sc2 = sc2;
+            c.ScTot = sc1 * sc2;
+            c.Type = (c.ScTot == 1.0) ? "Opaque" : "Fenestration";
+            c.Uvalue = c.ComputeUvalue(c.Materials);
+            return c;
+        }
 
-            // Set Type based on total shading coefficient (default is 1.0)
-            Type = (ScTot == 1.0) ? "Opaque" : "Fenestration";
-
-            bool hasMaterials = materials != null && materials.Count > 0;
-            bool hasUvalue = uvalue > 0.0;
-
-            if (hasUvalue)
-            {
-                // Uvalue input overrides
-                Uvalue = uvalue;
-            }
-            else if (hasMaterials)
-            {
-                // Materials supplied but no Uvalue - compute from materials
-                Uvalue = ComputeUvalue(Materials);
-            }
-            else
-            {
-                // Neither supplied - set to 0 and warn user
-                Uvalue = 0.0;
-                Console.WriteLine($"Warning: FluxConstruction '{name}' created without materials or U-value. U-value set to 0.0.");
-            }
+        private FluxConstruction()
+        {
+            Id = null!;
+            Name = null!;
+            Materials = null!;
+            Type = null!;
         }
 
         /// <summary>

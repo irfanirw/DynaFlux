@@ -10,7 +10,7 @@ namespace DynaFlux.Result
     /// Inherits from FluxOrientation and adds result computation properties.
     /// Based on Singapore BCA ETTV standard (ref: retv.pdf)
     /// </summary>
-    public class FluxOrientationResult : FluxOrientation
+    public class FluxOrientationEttvResult : FluxOrientation
     {
         /// <summary>
         /// Opaque conduction heat gain in W/m²
@@ -38,7 +38,7 @@ namespace DynaFlux.Result
         /// Creates a new FluxOrientationResult from a FluxOrientation
         /// </summary>
         /// <param name="orientation">Source FluxOrientation</param>
-        public FluxOrientationResult(FluxOrientation orientation)
+        public FluxOrientationEttvResult(FluxOrientation orientation)
             : base(orientation.Name, orientation.Normal, orientation.Angle)
         {
             OpaqueConductionHeatGain = 0.0;

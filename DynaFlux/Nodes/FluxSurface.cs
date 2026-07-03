@@ -30,6 +30,12 @@ namespace DynaFlux.Build
         public FluxOrientation Orientation { get; set; }
 
         /// <summary>
+        /// Correction factor for solar heat gain calculations.
+        /// Null for Opaque surfaces — set automatically in the constructor based on Construction.Type.
+        /// </summary>
+        public double? CorrectionFactor => Orientation?.CorrectionFactor;
+
+        /// <summary>
         /// Creates a new FluxSurface with automatic area and orientation assignment
         /// </summary>
         /// <param name="face">Geometric face</param>
@@ -50,6 +56,12 @@ namespace DynaFlux.Build
             else
             {
                 Orientation = orientation;
+            }
+
+            // Null out CorrectionFactor for opaque surfaces — it only applies to fenestration
+            if (string.Equals(Construction.Type, "Opaque", StringComparison.OrdinalIgnoreCase))
+            {
+                Orientation.CorrectionFactor = null;
             }
 
             // Auto-assign area from the face
@@ -117,13 +129,15 @@ namespace DynaFlux.Build
         /// <returns>Solar heat gain in Watts</returns>
         public double CalculateSolarHeatGain(double shadingCoefficient = 1.0)
         {
-            if (Orientation == null)
-            {
+            if (Orientation == null || Construction == null)
                 return 0.0;
-            }
+
+            // CorrectionFactor is null for Opaque surfaces — solar heat gain does not apply
+            if (CorrectionFactor == null)
+                return 0.0;
 
             double solarFactor = Orientation.GetSolarHeatGainFactor();
-            return Area * solarFactor * shadingCoefficient;
+            return Area * solarFactor * shadingCoefficient * CorrectionFactor.Value;
         }
 
         /// <summary>
@@ -136,15 +150,18 @@ namespace DynaFlux.Build
         /// <returns>ETTV value in W/m²</returns>
         public double CalculateETTV(double temperatureDifference = 7.0, double shadingCoefficient = 1.0)
         {
-            if (Orientation == null)
+            double conductionComponent = Construction.Uvalue * temperatureDifference;
+
+            // CorrectionFactor is null for Opaque surfaces — radiation component does not apply
+            if (Orientation != null && CorrectionFactor != null)
             {
-                return Construction.Uvalue * temperatureDifference;
+                double solarComponent = Orientation.GetSolarHeatGainFactor()
+                                        * shadingCoefficient
+                                        * CorrectionFactor.Value;
+                return conductionComponent + solarComponent;
             }
 
-            double conductionComponent = Construction.Uvalue * temperatureDifference;
-            double solarComponent = Orientation.GetSolarHeatGainFactor() * shadingCoefficient;
-
-            return conductionComponent + solarComponent;
+            return conductionComponent;
         }
 
         /// <summary>
