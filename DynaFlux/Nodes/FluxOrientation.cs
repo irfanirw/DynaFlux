@@ -26,10 +26,11 @@ namespace DynaFlux.Build
         public double Angle { get; set; }
 
         /// <summary>
-        /// Correction factor based on orientation
-        /// Used in BCA ETTV calculations for orientation-specific adjustments
+        /// Correction factor based on orientation.
+        /// Null for Opaque surfaces (correction factor does not apply).
+        /// Used in BCA ETTV calculations for orientation-specific adjustments.
         /// </summary>
-        public double CorrectionFactor { get; private set; }
+        public double? CorrectionFactor { get; set; }
 
         /// <summary>
         /// Creates a new FluxOrientation

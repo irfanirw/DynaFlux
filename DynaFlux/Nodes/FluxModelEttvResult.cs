@@ -9,7 +9,7 @@ namespace DynaFlux.Result
     /// Represents the complete ETTV analysis result for a building model.
     /// Computes overall ETTV and per-orientation ETTV based on Singapore BCA ETTV standard (ref: retv.pdf)
     /// </summary>
-    public class FluxModelResult
+    public class FluxModelEttvResult
     {
         private FluxModel _model;
 
@@ -40,15 +40,15 @@ namespace DynaFlux.Result
         /// ETTV computation results per facade orientation
         /// Automatically populated when Model is assigned
         /// </summary>
-        public List<FluxOrientationResult> ResultPerOrientation { get; private set; }
+        public List<FluxOrientationEttvResult> ResultPerOrientation { get; private set; }
 
         /// <summary>
         /// Creates a new FluxModelResult
         /// </summary>
         /// <param name="model">Optional FluxModel to analyze (if provided, ETTV computation will begin immediately)</param>
-        public FluxModelResult(FluxModel model = null)
+        public FluxModelEttvResult(FluxModel model = null)
         {
-            ResultPerOrientation = new List<FluxOrientationResult>();
+            ResultPerOrientation = new List<FluxOrientationEttvResult>();
             AverageETTV = 0.0;
             
             // Use the Model property setter to trigger computation
@@ -74,7 +74,7 @@ namespace DynaFlux.Result
             // Compute ETTV for each facade orientation
             foreach (var orientation in _model.FacadeOrientations)
             {
-                var orientationResult = new FluxOrientationResult(orientation);
+                var orientationResult = new FluxOrientationEttvResult(orientation);
 
                 // Get all surfaces with this orientation
                 var surfacesWithOrientation = _model.Surfaces
@@ -117,7 +117,7 @@ namespace DynaFlux.Result
                     double fenestrationAreaSCSum = fenestrationSurfaces.Sum(s => s.Area * (s.Construction?.ScTot ?? 1.0));
                     if (totalArea > 0)
                     {
-                        orientationResult.FenestrationRadiationHeatGain = 211.0 * fenestrationAreaSCSum * orientation.CorrectionFactor / totalArea;
+                        orientationResult.FenestrationRadiationHeatGain = 211.0 * fenestrationAreaSCSum * (orientation.CorrectionFactor ?? 0.0) / totalArea;
                     }
                 }
 
