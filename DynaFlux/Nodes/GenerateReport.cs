@@ -65,10 +65,14 @@ namespace DynaFlux.Report
             var orientations = result.ResultPerOrientation ?? new List<FluxOrientationEttvResult>();
             var surfaces = result.Model?.Surfaces ?? new List<FluxSurface>();
 
-            // Overall summary figures
-            double totalGrossArea       = orientations.Sum(o => o.GrossArea);
-            double totalFenestrationArea = orientations.Sum(o => o.FenestrationArea);
-            double totalOpaqueArea      = orientations.Sum(o => o.OpaqueArea);
+            // Overall summary figures — areas summed directly from surfaces
+            double totalFenestrationArea = surfaces
+                .Where(s => string.Equals(s?.Construction?.Type, "Fenestration", StringComparison.OrdinalIgnoreCase))
+                .Sum(s => s.Area);
+            double totalOpaqueArea = surfaces
+                .Where(s => !string.Equals(s?.Construction?.Type, "Fenestration", StringComparison.OrdinalIgnoreCase))
+                .Sum(s => s.Area);
+            double totalGrossArea       = totalOpaqueArea + totalFenestrationArea;
             double overallWwr           = totalGrossArea > 0 ? totalFenestrationArea / totalGrossArea * 100.0 : 0.0;
             double totalGrossHeatGain   = orientations.Sum(o => o.OrientationGrossHeatGain * o.GrossArea);
 
@@ -86,6 +90,7 @@ namespace DynaFlux.Report
             sb.AppendLine("        th { background: #f3f3f3; text-align: left; }");
             sb.AppendLine("        hr { border: 0; border-top: 1px solid #ddd; }");
             sb.AppendLine("    </style>");
+            sb.AppendLine("    <script src=\"https://cdn.jsdelivr.net/npm/chart.js@4\"></script>");
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
 
@@ -97,20 +102,23 @@ namespace DynaFlux.Report
             sb.AppendLine($"Date: {DateTime.Now:dd MMM yyyy}</p>");
             sb.AppendLine("<hr/>");
 
+            // --- Charts ---
+            sb.Append(BuildChartsHtml(orientations));
+
             // --- Overall summary ---
             sb.AppendLine("<table>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">Average heat gain</th><td>{result.AverageETTV:F3} W/m&#178;</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Average ETTV</th><td>{result.AverageETTV:F3} W/m&#178;</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">WWR</th><td>{overallWwr:F2} %</td></tr>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">Window area</th><td>{totalFenestrationArea:F2} m&#178;</td></tr>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">Wall area</th><td>{totalOpaqueArea:F2} m&#178;</td></tr>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">Gross area</th><td>{totalGrossArea:F2} m&#178;</td></tr>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">Total gross heat gain</th><td>{totalGrossHeatGain:F3} W</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Window Area</th><td>{totalFenestrationArea:F2} m&#178;</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Wall Area</th><td>{totalOpaqueArea:F2} m&#178;</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Gross Area</th><td>{totalGrossArea:F2} m&#178;</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Total Gross Heat Gain</th><td>{totalGrossHeatGain:F3} W</td></tr>");
             sb.AppendLine("</table>");
             sb.AppendLine("<br/>");
 
             // --- Per-orientation breakdown ---
             sb.AppendLine("<table>");
-            sb.AppendLine("<thead><tr><th colspan=\"2\">Breakdown by orientation</th></tr></thead>");
+            sb.AppendLine("<thead><tr><th colspan=\"2\">Breakdown by Orientation</th></tr></thead>");
             sb.AppendLine("<tbody>");
 
             foreach (var or in orientations)
@@ -122,13 +130,13 @@ namespace DynaFlux.Report
                 sb.AppendLine($"<tr><th colspan=\"2\">Orientation: {Encode(name)} ({Encode(abbrev)})</th></tr>");
                 sb.AppendLine($"<tr><th style=\"text-align:left;\">Average ETTV</th><td>{or.OrientationGrossHeatGain:F3} W/m&#178;</td></tr>");
                 sb.AppendLine($"<tr><th style=\"text-align:left;\">WWR</th><td>{or.Wwr * 100.0:F2} %</td></tr>");
-                sb.AppendLine($"<tr><th style=\"text-align:left;\">Window area</th><td>{or.FenestrationArea:F2} m&#178;</td></tr>");
-                sb.AppendLine($"<tr><th style=\"text-align:left;\">Wall area</th><td>{or.OpaqueArea:F2} m&#178;</td></tr>");
-                sb.AppendLine($"<tr><th style=\"text-align:left;\">Gross area</th><td>{or.GrossArea:F2} m&#178;</td></tr>");
-                sb.AppendLine($"<tr><th style=\"text-align:left;\">Total gross heat gain</th><td>{grossHeatGain:F3} W</td></tr>");
+                sb.AppendLine($"<tr><th style=\"text-align:left;\">Window Area</th><td>{or.FenestrationArea:F2} m&#178;</td></tr>");
+                sb.AppendLine($"<tr><th style=\"text-align:left;\">Wall Area</th><td>{or.OpaqueArea:F2} m&#178;</td></tr>");
+                sb.AppendLine($"<tr><th style=\"text-align:left;\">Gross Area</th><td>{or.GrossArea:F2} m&#178;</td></tr>");
+                sb.AppendLine($"<tr><th style=\"text-align:left;\">Total Gross Heat Gain</th><td>{grossHeatGain:F3} W</td></tr>");
 
                 if (or.CorrectionFactor.HasValue)
-                    sb.AppendLine($"<tr><th style=\"text-align:left;\">Correction factor (Cf)</th><td>{or.CorrectionFactor.Value:F2}</td></tr>");
+                    sb.AppendLine($"<tr><th style=\"text-align:left;\">Correction Factor (CF)</th><td>{or.CorrectionFactor.Value:F2}</td></tr>");
 
                 // Construction breakdown table (nested)
                 sb.AppendLine("<tr><td colspan=\"2\">");
@@ -201,6 +209,81 @@ namespace DynaFlux.Report
             sb.AppendLine("</p>");
             sb.AppendLine("</body>");
             sb.AppendLine("</html>");
+
+            return sb.ToString();
+        }
+
+        // -------------------------------------------------------------------------
+        // Chart builder
+        // -------------------------------------------------------------------------
+
+        private static string BuildChartsHtml(List<FluxOrientationEttvResult> orientations)
+        {
+            var active = orientations.Where(o => o.GrossArea > 0).ToList();
+            if (active.Count == 0) return string.Empty;
+
+            var inv = System.Globalization.CultureInfo.InvariantCulture;
+            string[] palette = { "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f", "#edc948", "#b07aa1", "#ff9da7" };
+
+            var shortLabels = new List<string>();
+            var ettvContrib = new List<string>();  // total W per orientation
+            var ettvPerSqm  = new List<string>();  // W/m² per orientation
+            var wwrValues   = new List<string>();  // WWR % per orientation
+            var colors      = new List<string>();
+
+            for (int i = 0; i < active.Count; i++)
+            {
+                var o = active[i];
+                string name   = o.Name ?? "Unknown";
+                string abbrev = OrientationAbbreviations.TryGetValue(name, out var ab) ? ab : name;
+                shortLabels.Add($"\"{abbrev}\"");
+                ettvContrib.Add((o.OrientationGrossHeatGain * o.GrossArea).ToString("F2", inv));
+                ettvPerSqm.Add(o.OrientationGrossHeatGain.ToString("F3", inv));
+                wwrValues.Add((o.Wwr * 100.0).ToString("F2", inv));
+                colors.Add($"\"{palette[i % palette.Length]}\"");
+            }
+
+            string labelsJs = "[" + string.Join(",", shortLabels) + "]";
+            string ettvCJs  = "[" + string.Join(",", ettvContrib)  + "]";
+            string ettvPJs  = "[" + string.Join(",", ettvPerSqm)   + "]";
+            string wwrJs    = "[" + string.Join(",", wwrValues)    + "]";
+            string colorsJs = "[" + string.Join(",", colors)       + "]";
+
+            var sb = new StringBuilder();
+            sb.AppendLine("<h2 style=\"margin-top:1.5rem;\">ETTV Overview</h2>");
+            sb.AppendLine("<div style=\"display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:1.5rem;\">");
+            sb.AppendLine("  <div style=\"flex:1;min-width:260px;max-width:440px;\"><canvas id=\"dynaflux-ettv-chart\"></canvas></div>");
+            sb.AppendLine("  <div style=\"flex:1;min-width:260px;max-width:440px;\"><canvas id=\"dynaflux-wwr-chart\"></canvas></div>");
+            sb.AppendLine("</div>");
+            sb.AppendLine("<script>");
+            sb.AppendLine("(function(){");
+            sb.AppendLine($"  var lb={labelsJs},ec={ettvCJs},ep={ettvPJs},wr={wwrJs},cl={colorsJs};");
+            sb.AppendLine("  if(typeof Chart==='undefined')return;");
+            // ETTV contribution pie chart
+            sb.AppendLine("  new Chart(document.getElementById('dynaflux-ettv-chart'),{type:'pie',");
+            sb.AppendLine("    data:{labels:lb,datasets:[{data:ec,backgroundColor:cl}]},");
+            sb.AppendLine("    options:{plugins:{");
+            sb.AppendLine("      title:{display:true,text:'ETTV Contribution by Orientation'},");
+            sb.AppendLine("      tooltip:{callbacks:{label:function(c){");
+            sb.AppendLine("        var t=c.dataset.data.reduce(function(a,b){return a+b;},0);");
+            sb.AppendLine("        return[c.label+': '+c.parsed.toFixed(0)+' W ('+(c.parsed/t*100).toFixed(1)+'%)',");
+            sb.AppendLine("               'Average ETTV: '+ep[c.dataIndex]+' W/m\u00b2',");
+            sb.AppendLine("               'WWR: '+wr[c.dataIndex]+'%'];}}},");
+            sb.AppendLine("      legend:{position:'bottom'}}}});");
+            // WWR bar chart
+            sb.AppendLine("  new Chart(document.getElementById('dynaflux-wwr-chart'),{type:'bar',");
+            sb.AppendLine("    data:{labels:lb,datasets:[{label:'WWR (%)',data:wr,backgroundColor:cl,borderRadius:4}]},");
+            sb.AppendLine("    options:{");
+            sb.AppendLine("      plugins:{");
+            sb.AppendLine("        title:{display:true,text:'Window-to-Wall Ratio by Orientation'},");
+            sb.AppendLine("        tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+'%';}}},");
+            sb.AppendLine("        legend:{display:false}},");
+            sb.AppendLine("      scales:{y:{beginAtZero:true,max:100,");
+            sb.AppendLine("        title:{display:true,text:'WWR (%)'},");
+            sb.AppendLine("        ticks:{callback:function(v){return v+'%';}}}}}});");
+            sb.AppendLine("})();");
+            sb.AppendLine("</script>");
+            sb.AppendLine("<hr/>");
 
             return sb.ToString();
         }

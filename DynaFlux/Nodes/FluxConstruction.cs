@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Autodesk.DesignScript.Runtime;
 
 namespace DynaFlux.Build
 {
@@ -56,45 +57,51 @@ namespace DynaFlux.Build
         /// <summary>
         /// Creates a FluxConstruction with a manually specified U-value.
         /// Use this when the U-value is already known (e.g. from a datasheet).
+        /// Type is inferred automatically: supplying <paramref name="sc1"/> marks the
+        /// construction as "Fenestration"; omitting it marks it as "Opaque".
+        /// ScTot is computed as Sc1 × Sc2 whenever sc1 is supplied.
         /// </summary>
         /// <param name="id">Unique identifier</param>
         /// <param name="name">Construction name</param>
         /// <param name="uvalue">Thermal transmittance in W/(m²·K)</param>
-        /// <param name="sc1">Shading coefficient 1 (default = 1.0)</param>
-        /// <param name="sc2">Shading coefficient 2 (default = 1.0)</param>
-        public static FluxConstruction ByUvalue(string id, string name, double uvalue, double sc1 = 1.0, double sc2 = 1.0)
+        /// <param name="sc1">Shading coefficient 1 — supply to mark as Fenestration</param>
+        /// <param name="sc2">Shading coefficient 2 — supply to include in ScTot computation</param>
+        public static FluxConstruction ByUvalue(string id, string name, double uvalue, [DefaultArgument("null")] double? sc1 = null, [DefaultArgument("null")] double? sc2 = null)
         {
             var c = new FluxConstruction();
             c.Id = id;
             c.Name = name;
             c.Materials = new List<FluxMaterial>();
             c.Uvalue = uvalue;
-            c.Sc1 = sc1;
-            c.Sc2 = sc2;
-            c.ScTot = sc1 * sc2;
-            c.Type = (c.ScTot == 1.0) ? "Opaque" : "Fenestration";
+            c.Type = sc1.HasValue ? "Fenestration" : "Opaque";
+            c.Sc1 = sc1 ?? 1.0;
+            c.Sc2 = sc2 ?? 1.0;
+            c.ScTot = c.Sc1 * c.Sc2;
             return c;
         }
 
         /// <summary>
         /// Creates a FluxConstruction from material layers.
         /// U-value is automatically computed from the material assembly.
+        /// Type is inferred automatically: supplying <paramref name="sc1"/> marks the
+        /// construction as "Fenestration"; omitting it marks it as "Opaque".
+        /// ScTot is computed as Sc1 × Sc2 whenever sc1 is supplied.
         /// </summary>
         /// <param name="id">Unique identifier</param>
         /// <param name="name">Construction name</param>
         /// <param name="materials">List of materials from exterior to interior</param>
-        /// <param name="sc1">Shading coefficient 1 (default = 1.0)</param>
-        /// <param name="sc2">Shading coefficient 2 (default = 1.0)</param>
-        public static FluxConstruction ByMaterials(string id, string name, List<FluxMaterial> materials, double sc1 = 1.0, double sc2 = 1.0)
+        /// <param name="sc1">Shading coefficient 1 — supply to mark as Fenestration</param>
+        /// <param name="sc2">Shading coefficient 2 — supply to include in ScTot computation</param>
+        public static FluxConstruction ByMaterials(string id, string name, List<FluxMaterial> materials, [DefaultArgument("null")] double? sc1 = null, [DefaultArgument("null")] double? sc2 = null)
         {
             var c = new FluxConstruction();
             c.Id = id;
             c.Name = name;
             c.Materials = materials ?? new List<FluxMaterial>();
-            c.Sc1 = sc1;
-            c.Sc2 = sc2;
-            c.ScTot = sc1 * sc2;
-            c.Type = (c.ScTot == 1.0) ? "Opaque" : "Fenestration";
+            c.Type = sc1.HasValue ? "Fenestration" : "Opaque";
+            c.Sc1 = sc1 ?? 1.0;
+            c.Sc2 = sc2 ?? 1.0;
+            c.ScTot = c.Sc1 * c.Sc2;
             c.Uvalue = c.ComputeUvalue(c.Materials);
             return c;
         }

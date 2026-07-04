@@ -10,99 +10,132 @@
         th { background: #f3f3f3; text-align: left; }
         hr { border: 0; border-top: 1px solid #ddd; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </head>
 <body>
 <h1>Envelope Thermal Transfer Value (ETTV) Report</h1>
 <p>Produced with DynaFlux<br/>
 Version: 1.0<br/>
 Project Name: TestBox<br/>
-Date: 04 Jul 2026</p>
+Date: 05 Jul 2026</p>
+<hr/>
+<h2 style="margin-top:1.5rem;">ETTV Overview</h2>
+<div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:1.5rem;">
+  <div style="flex:1;min-width:260px;max-width:440px;"><canvas id="dynaflux-ettv-chart"></canvas></div>
+  <div style="flex:1;min-width:260px;max-width:440px;"><canvas id="dynaflux-wwr-chart"></canvas></div>
+</div>
+<script>
+(function(){
+  var lb=["S","W","N","E"],ec=[195.55,922.02,191.28,910.62],ep=[13.037,76.835,12.752,75.885],wr=[25.00,25.00,25.00,25.00],cl=["#4e79a7","#f28e2b","#e15759","#76b7b2"];
+  if(typeof Chart==='undefined')return;
+  new Chart(document.getElementById('dynaflux-ettv-chart'),{type:'pie',
+    data:{labels:lb,datasets:[{data:ec,backgroundColor:cl}]},
+    options:{plugins:{
+      title:{display:true,text:'ETTV Contribution by Orientation'},
+      tooltip:{callbacks:{label:function(c){
+        var t=c.dataset.data.reduce(function(a,b){return a+b;},0);
+        return[c.label+': '+c.parsed.toFixed(0)+' W ('+(c.parsed/t*100).toFixed(1)+'%)',
+               'Average ETTV: '+ep[c.dataIndex]+' W/m²',
+               'WWR: '+wr[c.dataIndex]+'%'];}}},
+      legend:{position:'bottom'}}}});
+  new Chart(document.getElementById('dynaflux-wwr-chart'),{type:'bar',
+    data:{labels:lb,datasets:[{label:'WWR (%)',data:wr,backgroundColor:cl,borderRadius:4}]},
+    options:{
+      plugins:{
+        title:{display:true,text:'Window-to-Wall Ratio by Orientation'},
+        tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+'%';}}},
+        legend:{display:false}},
+      scales:{y:{beginAtZero:true,max:100,
+        title:{display:true,text:'WWR (%)'},
+        ticks:{callback:function(v){return v+'%';}}}}}});
+})();
+</script>
 <hr/>
 <table>
-<tr><th style="text-align:left;">Average heat gain</th><td>39.082 W/m&#178;</td></tr>
-<tr><th style="text-align:left;">WWR</th><td>42.25 %</td></tr>
-<tr><th style="text-align:left;">Window area</th><td>22.82 m&#178;</td></tr>
-<tr><th style="text-align:left;">Wall area</th><td>31.18 m&#178;</td></tr>
-<tr><th style="text-align:left;">Gross area</th><td>54.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total gross heat gain</th><td>2110.421 W</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>41.101 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
+<tr><th style="text-align:left;">Window Area</th><td>13.50 m&#178;</td></tr>
+<tr><th style="text-align:left;">Wall Area</th><td>40.50 m&#178;</td></tr>
+<tr><th style="text-align:left;">Gross Area</th><td>54.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>2219.467 W</td></tr>
 </table>
 <br/>
 <table>
-<thead><tr><th colspan="2">Breakdown by orientation</th></tr></thead>
+<thead><tr><th colspan="2">Breakdown by Orientation</th></tr></thead>
 <tbody>
 <tr><th colspan="2">Orientation: South (S)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>34.357 W/m&#178;</td></tr>
-<tr><th style="text-align:left;">WWR</th><td>42.25 %</td></tr>
-<tr><th style="text-align:left;">Window area</th><td>6.34 m&#178;</td></tr>
-<tr><th style="text-align:left;">Wall area</th><td>8.66 m&#178;</td></tr>
-<tr><th style="text-align:left;">Gross area</th><td>15.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total gross heat gain</th><td>515.356 W</td></tr>
-<tr><th style="text-align:left;">Correction factor (Cf)</th><td>0.83</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>13.037 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
+<tr><th style="text-align:left;">Window Area</th><td>3.75 m&#178;</td></tr>
+<tr><th style="text-align:left;">Wall Area</th><td>11.25 m&#178;</td></tr>
+<tr><th style="text-align:left;">Gross Area</th><td>15.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>195.550 W</td></tr>
+<tr><th style="text-align:left;">Correction Factor (CF)</th><td>0.83</td></tr>
 <tr><td colspan="2">
 <table><tbody>
 <tr><th colspan="10" style="text-align:left;">Opaque Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>12 x Area x U-Value</th></tr>
-<tr><td>W1</td><td>Brick</td><td>8.66 m&#178;</td><td>0.120</td><td>12.474</td></tr>
+<tr><td>W1</td><td>Brick</td><td>11.25 m&#178;</td><td>0.120</td><td>16.200</td></tr>
 <tr><th colspan="10" style="text-align:left;">Fenestration Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>SC</th><th>3.4 x Area x U-Value</th><th>211 x Area x SC x CF</th></tr>
-<tr><td>F1</td><td>Double Pane Glazing</td><td>6.34 m&#178;</td><td>4.372</td><td>0.36</td><td>94.197</td><td>399.559</td></tr>
+<tr><td>F1</td><td>Double Pane Glazing</td><td>3.75 m&#178;</td><td>4.372</td><td>0.18</td><td>55.738</td><td>118.213</td></tr>
 </tbody></table>
 </td></tr>
 <tr><td colspan="2"><hr/></td></tr>
 <tr><th colspan="2">Orientation: West (W)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>47.194 W/m&#178;</td></tr>
-<tr><th style="text-align:left;">WWR</th><td>42.25 %</td></tr>
-<tr><th style="text-align:left;">Window area</th><td>5.07 m&#178;</td></tr>
-<tr><th style="text-align:left;">Wall area</th><td>6.93 m&#178;</td></tr>
-<tr><th style="text-align:left;">Gross area</th><td>12.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total gross heat gain</th><td>566.332 W</td></tr>
-<tr><th style="text-align:left;">Correction factor (Cf)</th><td>1.23</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>76.835 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
+<tr><th style="text-align:left;">Window Area</th><td>3.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Wall Area</th><td>9.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Gross Area</th><td>12.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>922.016 W</td></tr>
+<tr><th style="text-align:left;">Correction Factor (CF)</th><td>1.23</td></tr>
 <tr><td colspan="2">
 <table><tbody>
 <tr><th colspan="10" style="text-align:left;">Opaque Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>12 x Area x U-Value</th></tr>
-<tr><td>W1</td><td>Brick</td><td>6.93 m&#178;</td><td>0.120</td><td>9.979</td></tr>
+<tr><td>W2</td><td>Wall</td><td>9.00 m&#178;</td><td>5.120</td><td>552.960</td></tr>
 <tr><th colspan="10" style="text-align:left;">Fenestration Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>SC</th><th>3.4 x Area x U-Value</th><th>211 x Area x SC x CF</th></tr>
-<tr><td>F1</td><td>Double Pane Glazing</td><td>5.07 m&#178;</td><td>4.372</td><td>0.36</td><td>75.357</td><td>473.694</td></tr>
+<tr><td>F1</td><td>Double Pane Glazing</td><td>3.00 m&#178;</td><td>4.372</td><td>0.18</td><td>44.590</td><td>140.146</td></tr>
 </tbody></table>
 </td></tr>
 <tr><td colspan="2"><hr/></td></tr>
 <tr><th colspan="2">Orientation: North (N)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>33.394 W/m&#178;</td></tr>
-<tr><th style="text-align:left;">WWR</th><td>42.25 %</td></tr>
-<tr><th style="text-align:left;">Window area</th><td>6.34 m&#178;</td></tr>
-<tr><th style="text-align:left;">Wall area</th><td>8.66 m&#178;</td></tr>
-<tr><th style="text-align:left;">Gross area</th><td>15.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total gross heat gain</th><td>500.914 W</td></tr>
-<tr><th style="text-align:left;">Correction factor (Cf)</th><td>0.80</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>12.752 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
+<tr><th style="text-align:left;">Window Area</th><td>3.75 m&#178;</td></tr>
+<tr><th style="text-align:left;">Wall Area</th><td>11.25 m&#178;</td></tr>
+<tr><th style="text-align:left;">Gross Area</th><td>15.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>191.278 W</td></tr>
+<tr><th style="text-align:left;">Correction Factor (CF)</th><td>0.80</td></tr>
 <tr><td colspan="2">
 <table><tbody>
 <tr><th colspan="10" style="text-align:left;">Opaque Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>12 x Area x U-Value</th></tr>
-<tr><td>W1</td><td>Brick</td><td>8.66 m&#178;</td><td>0.120</td><td>12.474</td></tr>
+<tr><td>W1</td><td>Brick</td><td>11.25 m&#178;</td><td>0.120</td><td>16.200</td></tr>
 <tr><th colspan="10" style="text-align:left;">Fenestration Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>SC</th><th>3.4 x Area x U-Value</th><th>211 x Area x SC x CF</th></tr>
-<tr><td>F1</td><td>Double Pane Glazing</td><td>6.34 m&#178;</td><td>4.372</td><td>0.36</td><td>94.197</td><td>385.117</td></tr>
+<tr><td>F1</td><td>Double Pane Glazing</td><td>3.75 m&#178;</td><td>4.372</td><td>0.18</td><td>55.738</td><td>113.940</td></tr>
 </tbody></table>
 </td></tr>
 <tr><td colspan="2"><hr/></td></tr>
 <tr><th colspan="2">Orientation: East (E)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>43.985 W/m&#178;</td></tr>
-<tr><th style="text-align:left;">WWR</th><td>42.25 %</td></tr>
-<tr><th style="text-align:left;">Window area</th><td>5.07 m&#178;</td></tr>
-<tr><th style="text-align:left;">Wall area</th><td>6.93 m&#178;</td></tr>
-<tr><th style="text-align:left;">Gross area</th><td>12.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total gross heat gain</th><td>527.820 W</td></tr>
-<tr><th style="text-align:left;">Correction factor (Cf)</th><td>1.13</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>75.885 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
+<tr><th style="text-align:left;">Window Area</th><td>3.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Wall Area</th><td>9.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Gross Area</th><td>12.00 m&#178;</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>910.622 W</td></tr>
+<tr><th style="text-align:left;">Correction Factor (CF)</th><td>1.13</td></tr>
 <tr><td colspan="2">
 <table><tbody>
 <tr><th colspan="10" style="text-align:left;">Opaque Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>12 x Area x U-Value</th></tr>
-<tr><td>W1</td><td>Brick</td><td>6.93 m&#178;</td><td>0.120</td><td>9.979</td></tr>
+<tr><td>W2</td><td>Wall</td><td>9.00 m&#178;</td><td>5.120</td><td>552.960</td></tr>
 <tr><th colspan="10" style="text-align:left;">Fenestration Construction</th></tr>
 <tr><th>ID</th><th>Description</th><th>Area</th><th>U-Value (W/m&#178;K)</th><th>SC</th><th>3.4 x Area x U-Value</th><th>211 x Area x SC x CF</th></tr>
-<tr><td>F1</td><td>Double Pane Glazing</td><td>5.07 m&#178;</td><td>4.372</td><td>0.36</td><td>75.357</td><td>435.182</td></tr>
+<tr><td>F1</td><td>Double Pane Glazing</td><td>3.00 m&#178;</td><td>4.372</td><td>0.18</td><td>44.590</td><td>128.752</td></tr>
 </tbody></table>
 </td></tr>
 <tr><td colspan="2"><hr/></td></tr>
