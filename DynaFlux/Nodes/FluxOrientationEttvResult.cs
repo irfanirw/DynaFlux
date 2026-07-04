@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Autodesk.DesignScript.Geometry;
 using DynaFlux.Build;
 
@@ -35,6 +36,39 @@ namespace DynaFlux.Result
         public double FenestrationRadiationHeatGain { get; set; }
 
         /// <summary>
+        /// Total gross heat gain for this orientation in W/m²
+        /// OrientationGrossHeatGain = OpaqueConductionHeatGain + FenestrationConductionHeatGain + FenestrationRadiationHeatGain
+        /// </summary>
+        public double OrientationGrossHeatGain => OpaqueConductionHeatGain + FenestrationConductionHeatGain + FenestrationRadiationHeatGain;
+
+        /// <summary>
+        /// Total gross envelope area (opaque + fenestration) in m²
+        /// </summary>
+        public double GrossArea { get; set; }
+
+        /// <summary>
+        /// Total opaque surface area in m²
+        /// </summary>
+        public double OpaqueArea { get; set; }
+
+        /// <summary>
+        /// Total fenestration surface area in m²
+        /// </summary>
+        public double FenestrationArea { get; set; }
+
+        /// <summary>
+        /// Window-to-wall ratio (WWR)
+        /// WWR = FenestrationArea / GrossArea
+        /// </summary>
+        public double Wwr => GrossArea > 0 ? FenestrationArea / GrossArea : 0.0;
+
+        /// <summary>
+        /// List of unique FluxConstruction assemblies present in this orientation,
+        /// sorted alphabetically by FluxConstruction.Id
+        /// </summary>
+        public List<FluxConstruction> UniqueConstructions { get; set; }
+
+        /// <summary>
         /// Creates a new FluxOrientationResult from a FluxOrientation
         /// </summary>
         /// <param name="orientation">Source FluxOrientation</param>
@@ -44,6 +78,10 @@ namespace DynaFlux.Result
             OpaqueConductionHeatGain = 0.0;
             FenestrationConductionHeatGain = 0.0;
             FenestrationRadiationHeatGain = 0.0;
+            GrossArea = 0.0;
+            OpaqueArea = 0.0;
+            FenestrationArea = 0.0;
+            UniqueConstructions = new List<FluxConstruction>();
         }
 
         /// <summary>

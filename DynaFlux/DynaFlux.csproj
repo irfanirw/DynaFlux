@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <AssemblyName>DynaFlux</AssemblyName>
     <RootNamespace>DynaFlux</RootNamespace>
+    <OutputPath>bin\$(TargetFramework)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <!-- See DynaFluxCore.csproj for notes about enabling USE_DESIGNSCRIPT locally when your environment contains all required native dependencies and matching assembly versions -->
   </PropertyGroup>
 

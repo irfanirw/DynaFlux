@@ -96,6 +96,19 @@ namespace DynaFlux.Result
                     double totalFenestrationArea = fenestrationSurfaces.Sum(s => s.Area);
                     double totalArea = totalOpaqueArea + totalFenestrationArea; // Ao
 
+                    orientationResult.OpaqueArea = totalOpaqueArea;
+                    orientationResult.FenestrationArea = totalFenestrationArea;
+                    orientationResult.GrossArea = totalArea;
+
+                    // Collect unique constructions sorted by Id
+                    orientationResult.UniqueConstructions = surfacesWithOrientation
+                        .Select(s => s.Construction)
+                        .Where(c => c != null)
+                        .GroupBy(c => c.Id)
+                        .Select(g => g.First())
+                        .OrderBy(c => c.Id, StringComparer.Ordinal)
+                        .ToList();
+
                     // Calculate opaque conduction heat gain
                     // Formula: 12 × Σ(Awi × Uwi) / Aw
                     double opaqueAreaUvalueSum = opaqueSurfaces.Sum(s => s.Area * (s.Construction?.Uvalue ?? 0.0));
