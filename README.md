@@ -17,14 +17,17 @@ DynaFlux is a Dynamo ZeroTouch library for **Singapore BCA ETTV** calculations. 
 ## Core Nodes
 ### Build
 - **FluxMaterial** – Material layer with thickness and thermal conductivity
-- **FluxConstruction** – Assembly definition, U-value computation, shading coefficient, and type
+- **FluxConstruction** – Assembly definition with U-value, shading coefficients (`Sc1`, `Sc2`, `ScTot = Sc1 × Sc2`), and auto-inferred type: supplying `sc1` marks it as *Fenestration*, omitting it marks it as *Opaque*
 - **FluxSurface** – Geometry + construction + orientation with auto-derived area
 - **FluxOrientation** – Orientation name, angle, correction factor
-- **FluxModel** – Aggregates surfaces, unique orientations, and constructions
+- **FluxModel** – Aggregates surfaces, unique orientations, and constructions; includes `ProjectName` property
 
 ### Result
-- **FluxOrientationResult** – ETTV components per orientation
-- **FluxModelResult** – ETTV per orientation + average ETTV
+- **FluxOrientationEttvResult** – ETTV components per orientation (opaque conduction, fenestration conduction, fenestration radiation, gross heat gain, WWR, area breakdown, unique constructions)
+- **FluxModelEttvResult** – ETTV per orientation + average ETTV
+
+### Report
+- **EttvReport.GenerateReport** – Generates a self-contained HTML ETTV report (with Chart.js charts) saved alongside the active `.dyn` script; pass `run = true` to execute
 
 ---
 
@@ -61,7 +64,7 @@ Where:
 3. Build the solution
 
 The build outputs:
-- `DynaFlux/bin/Debug/net8.0-windows/DynaFlux.dll`
+- `DynaFlux/bin/net8.0-windows/DynaFlux.dll`
 
 ---
 
@@ -69,8 +72,9 @@ The build outputs:
 1. Load `DynaFlux.dll` into Dynamo (package folder or Load Library)
 2. Create materials and constructions
 3. Create surfaces from geometry
-4. Build a `FluxModel`
-5. Compute results with `FluxModelResult`
+4. Build a `FluxModel` (set `ProjectName` for report labelling)
+5. Compute results with `FluxModelEttvResult`
+6. Generate an HTML report with `EttvReport.GenerateReport` (set `run = true`)
 
 ---
 
