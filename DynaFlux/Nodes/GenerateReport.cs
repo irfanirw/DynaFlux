@@ -106,23 +106,16 @@ namespace DynaFlux.Report
             sb.Append(BuildChartsHtml(orientations));
 
             // --- Overall summary ---
-            const double BcaLimit = 50.0;
-            const double GmLimit  = 45.0;
-            bool bcaCompliant = result.AverageETTV <= BcaLimit;
-            bool gmCompliant  = result.AverageETTV <= GmLimit;
-            string bcaStatus  = bcaCompliant ? "COMPLIANT" : "NON-COMPLIANT";
-            string bcaColor   = bcaCompliant ? "green" : "red";
-            string gmStatus   = gmCompliant  ? "COMPLIANT" : "NON-COMPLIANT";
-            string gmColor    = gmCompliant  ? "green" : "red";
+            const double GmLimit = 45.0;
+            bool gmCompliant = result.AverageETTV <= GmLimit;
+            string gmStatus  = gmCompliant ? "COMPLIANT" : "NON-COMPLIANT";
+            string gmColor   = gmCompliant ? "green" : "red";
 
             sb.AppendLine("<table>");
             sb.AppendLine("<thead><tr><th colspan=\"2\">ETTV Calculation Summary</th></tr></thead>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Average ETTV</th><td>{result.AverageETTV:F3} W/m&#178;</td></tr>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">BCA Prescriptive Limit</th><td>{BcaLimit:F1} W/m&#178;</td></tr>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">BCA Compliance</th>" +
-                          $"<td style=\"color:{bcaColor};font-weight:bold;\">{bcaStatus}</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Green Mark 2021 / ES Code Baseline</th><td>{GmLimit:F1} W/m&#178;</td></tr>");
-            sb.AppendLine($"<tr><th style=\"text-align:left;\">Green Mark / ES Code Compliance</th>" +
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Compliance</th>" +
                           $"<td style=\"color:{gmColor};font-weight:bold;\">{gmStatus}</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">WWR</th><td>{overallWwr:F2} %</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Window Area</th><td>{totalFenestrationArea:F2} m&#178;</td></tr>");
