@@ -106,13 +106,83 @@ namespace DynaFlux.Report
             sb.Append(BuildChartsHtml(orientations));
 
             // --- Overall summary ---
+            const double BcaLimit = 50.0;
+            const double GmLimit  = 45.0;
+            bool bcaCompliant = result.AverageETTV <= BcaLimit;
+            bool gmCompliant  = result.AverageETTV <= GmLimit;
+            string bcaStatus  = bcaCompliant ? "COMPLIANT" : "NON-COMPLIANT";
+            string bcaColor   = bcaCompliant ? "green" : "red";
+            string gmStatus   = gmCompliant  ? "COMPLIANT" : "NON-COMPLIANT";
+            string gmColor    = gmCompliant  ? "green" : "red";
+
             sb.AppendLine("<table>");
+            sb.AppendLine("<thead><tr><th colspan=\"2\">ETTV Calculation Summary</th></tr></thead>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Average ETTV</th><td>{result.AverageETTV:F3} W/m&#178;</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">BCA Prescriptive Limit</th><td>{BcaLimit:F1} W/m&#178;</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">BCA Compliance</th>" +
+                          $"<td style=\"color:{bcaColor};font-weight:bold;\">{bcaStatus}</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Green Mark 2021 / ES Code Baseline</th><td>{GmLimit:F1} W/m&#178;</td></tr>");
+            sb.AppendLine($"<tr><th style=\"text-align:left;\">Green Mark / ES Code Compliance</th>" +
+                          $"<td style=\"color:{gmColor};font-weight:bold;\">{gmStatus}</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">WWR</th><td>{overallWwr:F2} %</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Window Area</th><td>{totalFenestrationArea:F2} m&#178;</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Wall Area</th><td>{totalOpaqueArea:F2} m&#178;</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Gross Area</th><td>{totalGrossArea:F2} m&#178;</td></tr>");
             sb.AppendLine($"<tr><th style=\"text-align:left;\">Total Gross Heat Gain</th><td>{totalGrossHeatGain:F3} W</td></tr>");
+            sb.AppendLine("</table>");
+            sb.AppendLine("<p style=\"font-size:0.85rem;color:#555;margin-top:0.5rem;\">");
+            sb.AppendLine("<strong>Note:</strong> For Singapore Green Mark 2021 / Energy Services (ES) Code compliance, ");
+            sb.AppendLine("the recommended ETTV baseline target is <strong>45 W/m&#178;</strong>. ");
+            sb.AppendLine("The BCA prescriptive limit remains 50 W/m&#178;.");
+            sb.AppendLine("</p>");
+            sb.AppendLine("<br/>");
+
+            // --- Facade Construction Summary ---
+            var allOpaqueConstructions = surfaces
+                .Where(s => !string.Equals(s?.Construction?.Type, "Fenestration", StringComparison.OrdinalIgnoreCase)
+                            && s?.Construction != null)
+                .GroupBy(s => s.Construction.Id)
+                .Select(g => g.First().Construction)
+                .OrderBy(c => c.Id, StringComparer.Ordinal)
+                .ToList();
+
+            var allFenestrationConstructions = surfaces
+                .Where(s => string.Equals(s?.Construction?.Type, "Fenestration", StringComparison.OrdinalIgnoreCase)
+                            && s?.Construction != null)
+                .GroupBy(s => s.Construction.Id)
+                .Select(g => g.First().Construction)
+                .OrderBy(c => c.Id, StringComparer.Ordinal)
+                .ToList();
+
+            sb.AppendLine("<table>");
+            sb.AppendLine("<thead>");
+            sb.AppendLine("<tr><th colspan=\"4\">Facade Construction Summary</th></tr>");
+            sb.AppendLine("<tr><th>ID</th><th>Description</th><th>U-Value (W/m&#178;K)</th><th>SC Value</th></tr>");
+            sb.AppendLine("</thead>");
+            sb.AppendLine("<tbody>");
+            if (allOpaqueConstructions.Count > 0)
+            {
+                sb.AppendLine("<tr><th colspan=\"4\" style=\"text-align:left;\">Opaque</th></tr>");
+                foreach (var c in allOpaqueConstructions)
+                {
+                    sb.AppendLine($"<tr><td>{Encode(c.Id ?? "")}</td>" +
+                                  $"<td>{Encode(c.Name ?? "")}</td>" +
+                                  $"<td>{c.Uvalue:F3}</td>" +
+                                  $"<td>N/A</td></tr>");
+                }
+            }
+            if (allFenestrationConstructions.Count > 0)
+            {
+                sb.AppendLine("<tr><th colspan=\"4\" style=\"text-align:left;\">Fenestration</th></tr>");
+                foreach (var c in allFenestrationConstructions)
+                {
+                    sb.AppendLine($"<tr><td>{Encode(c.Id ?? "")}</td>" +
+                                  $"<td>{Encode(c.Name ?? "")}</td>" +
+                                  $"<td>{c.Uvalue:F3}</td>" +
+                                  $"<td>{c.ScTot:F2}</td></tr>");
+                }
+            }
+            sb.AppendLine("</tbody>");
             sb.AppendLine("</table>");
             sb.AppendLine("<br/>");
 
