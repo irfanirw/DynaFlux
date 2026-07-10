@@ -110,11 +110,11 @@ namespace DynaFlux.Result
                         .ToList();
 
                     // Calculate opaque conduction heat gain
-                    // Formula: 12 × Σ(Awi × Uwi) / Aw
+                    // Formula: 12 × Σ(Awi × Uwi) / Ao
                     double opaqueAreaUvalueSum = opaqueSurfaces.Sum(s => s.Area * (s.Construction?.Uvalue ?? 0.0));
-                    if (totalOpaqueArea > 0)
+                    if (totalArea > 0)
                     {
-                        orientationResult.OpaqueConductionHeatGain = 12.0 * opaqueAreaUvalueSum / totalOpaqueArea;
+                        orientationResult.OpaqueConductionHeatGain = 12.0 * opaqueAreaUvalueSum / totalArea;
                     }
 
                     // Calculate fenestration conduction heat gain

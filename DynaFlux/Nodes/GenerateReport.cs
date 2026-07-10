@@ -130,6 +130,85 @@ namespace DynaFlux.Report
             sb.AppendLine("</p>");
             sb.AppendLine("<br/>");
 
+            // --- Input Summary ---
+            sb.AppendLine("<table>");
+            sb.AppendLine("<thead>");
+            sb.AppendLine("<tr><th colspan=\"7\">Input Summary</th></tr>");
+            sb.AppendLine("<tr><th>Orientation</th><th>Construction Type</th><th>Element</th>" +
+                          "<th>U-Value (W/m&#178;K)</th><th>SC</th><th>CF</th><th>Area (m&#178;)</th></tr>");
+            sb.AppendLine("</thead>");
+            sb.AppendLine("<tbody>");
+            foreach (var or in orientations)
+            {
+                string orName = or.Name ?? "Unknown";
+                var orSurfaces = surfaces.Where(s => s?.Orientation?.Name == orName).ToList();
+
+                var opaqueGroups = orSurfaces
+                    .Where(s => !string.Equals(s?.Construction?.Type, "Fenestration", StringComparison.OrdinalIgnoreCase))
+                    .GroupBy(s => s.Construction?.Id)
+                    .Select(g => (Construction: g.First().Construction, TotalArea: g.Sum(s => s.Area)))
+                    .OrderBy(x => x.Construction?.Id, StringComparer.Ordinal)
+                    .ToList();
+
+                var fenGroups = orSurfaces
+                    .Where(s => string.Equals(s?.Construction?.Type, "Fenestration", StringComparison.OrdinalIgnoreCase))
+                    .GroupBy(s => s.Construction?.Id)
+                    .Select(g => (Construction: g.First().Construction, TotalArea: g.Sum(s => s.Area)))
+                    .OrderBy(x => x.Construction?.Id, StringComparer.Ordinal)
+                    .ToList();
+
+                int rowCount = opaqueGroups.Count + fenGroups.Count;
+                bool firstRow = true;
+                foreach (var item in opaqueGroups)
+                {
+                    string orientCell = firstRow ? $"<td rowspan=\"{rowCount}\">{Encode(orName)}</td>" : "";
+                    firstRow = false;
+                    sb.AppendLine($"<tr>{orientCell}" +
+                                  $"<td>{Encode(item.Construction?.Id ?? "")}</td>" +
+                                  $"<td>Opaque</td>" +
+                                  $"<td>{item.Construction?.Uvalue:F3}</td>" +
+                                  $"<td>N/A</td>" +
+                                  $"<td>N/A</td>" +
+                                  $"<td>{item.TotalArea:F2}</td></tr>");
+                }
+                foreach (var item in fenGroups)
+                {
+                    string orientCell = firstRow ? $"<td rowspan=\"{rowCount}\">{Encode(orName)}</td>" : "";
+                    firstRow = false;
+                    string cfVal = or.CorrectionFactor.HasValue ? or.CorrectionFactor.Value.ToString("F2") : "N/A";
+                    sb.AppendLine($"<tr>{orientCell}" +
+                                  $"<td>{Encode(item.Construction?.Id ?? "")}</td>" +
+                                  $"<td>Fenestration</td>" +
+                                  $"<td>{item.Construction?.Uvalue:F3}</td>" +
+                                  $"<td>{item.Construction?.ScTot:F2}</td>" +
+                                  $"<td>{cfVal}</td>" +
+                                  $"<td>{item.TotalArea:F2}</td></tr>");
+                }
+            }
+            sb.AppendLine("</tbody>");
+            sb.AppendLine("</table>");
+            sb.AppendLine("<br/>");
+
+            // --- ETTV by Orientation ---
+            sb.AppendLine("<table>");
+            sb.AppendLine("<thead>");
+            sb.AppendLine("<tr><th colspan=\"5\">ETTV by Orientation</th></tr>");
+            sb.AppendLine("<tr><th>Orientation</th><th>Wall Conduction (W/m&#178;)</th><th>Fenestration Conduction (W/m&#178;)</th><th>Solar Heat Gain (W/m&#178;)</th><th>ETTV (W/m&#178;)</th></tr>");
+            sb.AppendLine("</thead>");
+            sb.AppendLine("<tbody>");
+            foreach (var or in orientations)
+            {
+                string orName = or.Name ?? "Unknown";
+                sb.AppendLine($"<tr><td>{Encode(orName)}</td>" +
+                              $"<td>{or.OpaqueConductionHeatGain:F3}</td>" +
+                              $"<td>{or.FenestrationConductionHeatGain:F3}</td>" +
+                              $"<td>{or.FenestrationRadiationHeatGain:F3}</td>" +
+                              $"<td>{or.OrientationGrossHeatGain:F3}</td></tr>");
+            }
+            sb.AppendLine("</tbody>");
+            sb.AppendLine("</table>");
+            sb.AppendLine("<br/>");
+
             // --- Facade Construction Summary ---
             var allOpaqueConstructions = surfaces
                 .Where(s => !string.Equals(s?.Construction?.Type, "Fenestration", StringComparison.OrdinalIgnoreCase)

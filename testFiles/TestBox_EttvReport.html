@@ -17,7 +17,7 @@
 <p>Produced with DynaFlux<br/>
 Version: 1.0<br/>
 Project Name: TestBox<br/>
-Date: 09 Jul 2026</p>
+Date: 10 Jul 2026</p>
 <hr/>
 <h2 style="margin-top:1.5rem;">ETTV Overview</h2>
 <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:1.5rem;">
@@ -26,7 +26,7 @@ Date: 09 Jul 2026</p>
 </div>
 <script>
 (function(){
-  var lb=["S","W","N","E"],ec=[195.55,922.02,191.28,910.62],ep=[13.037,76.835,12.752,75.885],wr=[25.00,25.00,25.00,25.00],cl=["#4e79a7","#f28e2b","#e15759","#76b7b2"];
+  var lb=["S","W","N","E"],ec=[190.15,737.70,185.88,726.30],ep=[12.677,61.475,12.392,60.525],wr=[25.00,25.00,25.00,25.00],cl=["#4e79a7","#f28e2b","#e15759","#76b7b2"];
   if(typeof Chart==='undefined')return;
   new Chart(document.getElementById('dynaflux-ettv-chart'),{type:'pie',
     data:{labels:lb,datasets:[{data:ec,backgroundColor:cl}]},
@@ -53,20 +53,50 @@ Date: 09 Jul 2026</p>
 <hr/>
 <table>
 <thead><tr><th colspan="2">ETTV Calculation Summary</th></tr></thead>
-<tr><th style="text-align:left;">Average ETTV</th><td>41.101 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>34.075 W/m&#178;</td></tr>
 <tr><th style="text-align:left;">Green Mark 2021 / ES Code Baseline</th><td>45.0 W/m&#178;</td></tr>
 <tr><th style="text-align:left;">Compliance</th><td style="color:green;font-weight:bold;">COMPLIANT</td></tr>
 <tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
 <tr><th style="text-align:left;">Window Area</th><td>13.50 m&#178;</td></tr>
 <tr><th style="text-align:left;">Wall Area</th><td>40.50 m&#178;</td></tr>
 <tr><th style="text-align:left;">Gross Area</th><td>54.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>2219.467 W</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>1840.027 W</td></tr>
 </table>
 <p style="font-size:0.85rem;color:#555;margin-top:0.5rem;">
 <strong>Note:</strong> For Singapore Green Mark 2021 / Energy Services (ES) Code compliance, 
 the recommended ETTV baseline target is <strong>45 W/m&#178;</strong>. 
 The BCA prescriptive limit remains 50 W/m&#178;.
 </p>
+<br/>
+<table>
+<thead>
+<tr><th colspan="7">Input Summary</th></tr>
+<tr><th>Orientation</th><th>Construction Type</th><th>Element</th><th>U-Value (W/m&#178;K)</th><th>SC</th><th>CF</th><th>Area (m&#178;)</th></tr>
+</thead>
+<tbody>
+<tr><td rowspan="2">South</td><td>W1</td><td>Opaque</td><td>0.120</td><td>N/A</td><td>N/A</td><td>11.25</td></tr>
+<tr><td>F1</td><td>Fenestration</td><td>4.372</td><td>0.18</td><td>0.83</td><td>3.75</td></tr>
+<tr><td rowspan="2">West</td><td>W2</td><td>Opaque</td><td>5.120</td><td>N/A</td><td>N/A</td><td>9.00</td></tr>
+<tr><td>F1</td><td>Fenestration</td><td>4.372</td><td>0.18</td><td>1.23</td><td>3.00</td></tr>
+<tr><td rowspan="2">North</td><td>W1</td><td>Opaque</td><td>0.120</td><td>N/A</td><td>N/A</td><td>11.25</td></tr>
+<tr><td>F1</td><td>Fenestration</td><td>4.372</td><td>0.18</td><td>0.80</td><td>3.75</td></tr>
+<tr><td rowspan="2">East</td><td>W2</td><td>Opaque</td><td>5.120</td><td>N/A</td><td>N/A</td><td>9.00</td></tr>
+<tr><td>F1</td><td>Fenestration</td><td>4.372</td><td>0.18</td><td>1.13</td><td>3.00</td></tr>
+</tbody>
+</table>
+<br/>
+<table>
+<thead>
+<tr><th colspan="5">ETTV by Orientation</th></tr>
+<tr><th>Orientation</th><th>Wall Conduction (W/m&#178;)</th><th>Fenestration Conduction (W/m&#178;)</th><th>Solar Heat Gain (W/m&#178;)</th><th>ETTV (W/m&#178;)</th></tr>
+</thead>
+<tbody>
+<tr><td>South</td><td>1.080</td><td>3.716</td><td>7.881</td><td>12.677</td></tr>
+<tr><td>West</td><td>46.080</td><td>3.716</td><td>11.679</td><td>61.475</td></tr>
+<tr><td>North</td><td>1.080</td><td>3.716</td><td>7.596</td><td>12.392</td></tr>
+<tr><td>East</td><td>46.080</td><td>3.716</td><td>10.729</td><td>60.525</td></tr>
+</tbody>
+</table>
 <br/>
 <table>
 <thead>
@@ -86,12 +116,12 @@ The BCA prescriptive limit remains 50 W/m&#178;.
 <thead><tr><th colspan="2">Breakdown by Orientation</th></tr></thead>
 <tbody>
 <tr><th colspan="2">Orientation: South (S)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>13.037 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>12.677 W/m&#178;</td></tr>
 <tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
 <tr><th style="text-align:left;">Window Area</th><td>3.75 m&#178;</td></tr>
 <tr><th style="text-align:left;">Wall Area</th><td>11.25 m&#178;</td></tr>
 <tr><th style="text-align:left;">Gross Area</th><td>15.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>195.550 W</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>190.150 W</td></tr>
 <tr><th style="text-align:left;">Correction Factor (CF)</th><td>0.83</td></tr>
 <tr><td colspan="2">
 <table><tbody>
@@ -105,12 +135,12 @@ The BCA prescriptive limit remains 50 W/m&#178;.
 </td></tr>
 <tr><td colspan="2"><hr/></td></tr>
 <tr><th colspan="2">Orientation: West (W)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>76.835 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>61.475 W/m&#178;</td></tr>
 <tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
 <tr><th style="text-align:left;">Window Area</th><td>3.00 m&#178;</td></tr>
 <tr><th style="text-align:left;">Wall Area</th><td>9.00 m&#178;</td></tr>
 <tr><th style="text-align:left;">Gross Area</th><td>12.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>922.016 W</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>737.696 W</td></tr>
 <tr><th style="text-align:left;">Correction Factor (CF)</th><td>1.23</td></tr>
 <tr><td colspan="2">
 <table><tbody>
@@ -124,12 +154,12 @@ The BCA prescriptive limit remains 50 W/m&#178;.
 </td></tr>
 <tr><td colspan="2"><hr/></td></tr>
 <tr><th colspan="2">Orientation: North (N)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>12.752 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>12.392 W/m&#178;</td></tr>
 <tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
 <tr><th style="text-align:left;">Window Area</th><td>3.75 m&#178;</td></tr>
 <tr><th style="text-align:left;">Wall Area</th><td>11.25 m&#178;</td></tr>
 <tr><th style="text-align:left;">Gross Area</th><td>15.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>191.278 W</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>185.878 W</td></tr>
 <tr><th style="text-align:left;">Correction Factor (CF)</th><td>0.80</td></tr>
 <tr><td colspan="2">
 <table><tbody>
@@ -143,12 +173,12 @@ The BCA prescriptive limit remains 50 W/m&#178;.
 </td></tr>
 <tr><td colspan="2"><hr/></td></tr>
 <tr><th colspan="2">Orientation: East (E)</th></tr>
-<tr><th style="text-align:left;">Average ETTV</th><td>75.885 W/m&#178;</td></tr>
+<tr><th style="text-align:left;">Average ETTV</th><td>60.525 W/m&#178;</td></tr>
 <tr><th style="text-align:left;">WWR</th><td>25.00 %</td></tr>
 <tr><th style="text-align:left;">Window Area</th><td>3.00 m&#178;</td></tr>
 <tr><th style="text-align:left;">Wall Area</th><td>9.00 m&#178;</td></tr>
 <tr><th style="text-align:left;">Gross Area</th><td>12.00 m&#178;</td></tr>
-<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>910.622 W</td></tr>
+<tr><th style="text-align:left;">Total Gross Heat Gain</th><td>726.302 W</td></tr>
 <tr><th style="text-align:left;">Correction Factor (CF)</th><td>1.13</td></tr>
 <tr><td colspan="2">
 <table><tbody>

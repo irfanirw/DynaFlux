@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj": {}
+    "c:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj": {
+    "c:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj",
+        "projectUniqueName": "c:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj",
         "projectName": "DynaFlux",
-        "projectPath": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj",
+        "projectPath": "c:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\DynaFlux.csproj",
         "packagesPath": "C:\\Users\\iirwanuddin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\obj\\",
+        "outputPath": "c:\\Users\\iirwanuddin\\OneDrive - Exyte\\Documents\\GitHub\\DynaFlux\\DynaFlux\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\iirwanuddin\\AppData\\Roaming\\NuGet\\NuGet.Config"
