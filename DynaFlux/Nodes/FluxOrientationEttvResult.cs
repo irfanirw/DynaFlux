@@ -8,11 +8,22 @@ namespace DynaFlux.Result
 {
     /// <summary>
     /// Represents the ETTV calculation result for a specific orientation.
-    /// Inherits from FluxOrientation and adds result computation properties.
     /// Based on Singapore BCA ETTV standard (ref: retv.pdf)
     /// </summary>
-    public class FluxOrientationEttvResult : FluxOrientation
+    public class FluxOrientationEttvResult
     {
+        /// <summary>Orientation name (e.g. "North", "SouthWest")</summary>
+        public string Name { get; set; }
+
+        /// <summary>Surface normal vector</summary>
+        public Vector Normal { get; set; }
+
+        /// <summary>Angle in degrees clockwise from North (0–360)</summary>
+        public double Angle { get; set; }
+
+        /// <summary>Orientation correction factor (double.NaN for opaque surfaces)</summary>
+        public double CorrectionFactor { get; set; }
+
         /// <summary>
         /// Opaque conduction heat gain in W/m²
         /// Formula: 12 × Aw × Uw
@@ -69,12 +80,15 @@ namespace DynaFlux.Result
         public List<FluxConstruction> UniqueConstructions { get; set; }
 
         /// <summary>
-        /// Creates a new FluxOrientationResult from a FluxOrientation
+        /// Creates a new FluxOrientationEttvResult from a FluxOrientation
         /// </summary>
         /// <param name="orientation">Source FluxOrientation</param>
         public FluxOrientationEttvResult(FluxOrientation orientation)
-            : base(orientation.Name, orientation.Normal, orientation.Angle)
         {
+            Name = orientation.Name;
+            Normal = orientation.Normal;
+            Angle = orientation.Angle;
+            CorrectionFactor = orientation.CorrectionFactor;
             OpaqueConductionHeatGain = 0.0;
             FenestrationConductionHeatGain = 0.0;
             FenestrationRadiationHeatGain = 0.0;

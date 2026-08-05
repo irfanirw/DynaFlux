@@ -945,7 +945,7 @@
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "34ab203cff314ebf84cefd43c8815d82",
+          "Id": "46930c3cba0245479e1be7d695fee56f",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -954,7 +954,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d2c90394dda6429dbce5bec43e45e99e",
+          "Id": "f24775e56b0b4397a368600705fe496c",
           "Name": "",
           "Description": "Value of expression at line 2",
           "UsingDefaultValue": false,
@@ -963,18 +963,9 @@
           "KeepListStructure": false
         },
         {
-          "Id": "07ac3e42cf2e42d0a7e14afe8399dd59",
+          "Id": "172881771675445a90863e199bc36342",
           "Name": "",
           "Description": "Value of expression at line 3",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "741e57c9b7404c2888d4dba6ecd61f06",
-          "Name": "",
-          "Description": "Value of expression at line 4",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -983,7 +974,7 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly",
-      "Code": "\"F1\";\n\"Double Pane Glazing\";\n0.3;\n\"Fenestration\";"
+      "Code": "\"F1\";\n\"Double Pane Glazing\";\n0.3;"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -1554,24 +1545,6 @@
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
-        },
-        {
-          "Id": "b25c763b8ce84dbbbbb5e6a454d131f5",
-          "Name": "sc1",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "34f79a9cfda24c9698a6391a2818d690",
-          "Name": "sc2",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
         }
       ],
       "Outputs": [
@@ -1585,75 +1558,9 @@
           "KeepListStructure": false
         }
       ],
-      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalue@string,string,double,double,double",
+      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalue@string,string,double",
       "Replication": "Auto",
-      "Description": "FluxConstruction.ByUvalue (id: string, name: string, uvalue: double, sc1: double = null, sc2: double = null): FluxConstruction"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "Id": "585aa1b2e23a4613b6fd50aaf91f57ef",
-      "NodeType": "FunctionNode",
-      "Inputs": [
-        {
-          "Id": "a142cd1574ba4a938628daa9e7985afb",
-          "Name": "id",
-          "Description": "string",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "308aa329b74e46769934a56951f70b91",
-          "Name": "name",
-          "Description": "string",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "62495731c8364af2ae4c766f4da489a0",
-          "Name": "materials",
-          "Description": "FluxMaterial[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "658897699a4746ce9e6858000e5b6f43",
-          "Name": "sc1",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "2a892d855b854340b008b7ee59da9548",
-          "Name": "sc2",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "d9a410d21ea94eaf98df2eb256e203e5",
-          "Name": "FluxConstruction",
-          "Description": "FluxConstruction",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByMaterials@string,string,DynaFlux.Build.FluxMaterial[],double,double",
-      "Replication": "Auto",
-      "Description": "FluxConstruction.ByMaterials (id: string, name: string, materials: FluxMaterial[], sc1: double = null, sc2: double = null): FluxConstruction"
+      "Description": "FluxConstruction.ByUvalue (id: string, name: string, uvalue: double): FluxConstruction"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1884,24 +1791,6 @@
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
-        },
-        {
-          "Id": "6c61547305de4bbf8a5455a0ba8d214c",
-          "Name": "sc1",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "790eefeb938f446c823cc572aeef6daf",
-          "Name": "sc2",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
         }
       ],
       "Outputs": [
@@ -1915,9 +1804,9 @@
           "KeepListStructure": false
         }
       ],
-      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalue@string,string,double,double,double",
+      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalue@string,string,double",
       "Replication": "Auto",
-      "Description": "FluxConstruction.ByUvalue (id: string, name: string, uvalue: double, sc1: double = null, sc2: double = null): FluxConstruction"
+      "Description": "FluxConstruction.ByUvalue (id: string, name: string, uvalue: double): FluxConstruction"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -1997,24 +1886,6 @@
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
-        },
-        {
-          "Id": "ca654af146de4bc981355f5f3b691836",
-          "Name": "sc1",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "1286355a1ec3435ab44412d72980fb65",
-          "Name": "sc2",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
         }
       ],
       "Outputs": [
@@ -2028,9 +1899,9 @@
           "KeepListStructure": false
         }
       ],
-      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalue@string,string,double,double,double",
+      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalue@string,string,double",
       "Replication": "Auto",
-      "Description": "FluxConstruction.ByUvalue (id: string, name: string, uvalue: double, sc1: double = null, sc2: double = null): FluxConstruction"
+      "Description": "FluxConstruction.ByUvalue (id: string, name: string, uvalue: double): FluxConstruction"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -2063,24 +1934,6 @@
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
-        },
-        {
-          "Id": "b57539f2a8ee4857a2f7b997d8d63a5b",
-          "Name": "sc1",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "62b9813e5a6b47a4ab3870ff9addb3f2",
-          "Name": "sc2",
-          "Description": "double\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
         }
       ],
       "Outputs": [
@@ -2094,9 +1947,9 @@
           "KeepListStructure": false
         }
       ],
-      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByMaterials@string,string,DynaFlux.Build.FluxMaterial[],double,double",
+      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByMaterials@string,string,DynaFlux.Build.FluxMaterial[]",
       "Replication": "Auto",
-      "Description": "FluxConstruction.ByMaterials (id: string, name: string, materials: FluxMaterial[], sc1: double = null, sc2: double = null): FluxConstruction"
+      "Description": "FluxConstruction.ByMaterials (id: string, name: string, materials: FluxMaterial[]): FluxConstruction"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -2217,6 +2070,186 @@
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly",
       "Code": "Face.SurfaceGeometry(x);"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "06f420f50a034d56a24a04970ebf654a",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "74fec67286a3426caf0b87313cb14bf8",
+          "Name": "id",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6b82fe9af2844a78bf62feac95245a19",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b0e707264c4e46dcab79ef41dc02b793",
+          "Name": "uvalue",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fef4e357760c40a7ba350eb6b3e600d5",
+          "Name": "sc1",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bba66038b8f147eb81d02c08a6efe04d",
+          "Name": "sc2",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f91513107be44d7bbb4a19864f78389d",
+          "Name": "FluxConstruction",
+          "Description": "FluxConstruction",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalueFenestration@string,string,double,double,double",
+      "Replication": "Auto",
+      "Description": "FluxConstruction.ByUvalueFenestration (id: string, name: string, uvalue: double, sc1: double, sc2: double): FluxConstruction"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "9d4b7aa4aa894e5eab0d2764e10bc148",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "f99b93831a524e0fb980bb851fb4f983",
+          "Name": "id",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0a878e769da34854a702dd833b7d6b32",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f44ce61c6b6c4a8cab663c056deaa57c",
+          "Name": "uvalue",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "309d30050bb14bde87000f0d36e2fc0e",
+          "Name": "FluxConstruction",
+          "Description": "FluxConstruction",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByUvalue@string,string,double",
+      "Replication": "Auto",
+      "Description": "FluxConstruction.ByUvalue (id: string, name: string, uvalue: double): FluxConstruction"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "eb8fc4a4882f47a3b114932452b55bb6",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "d041e71daa3e4a60acaf62b426c94c15",
+          "Name": "id",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b7f658053e44495c968f43835ec78095",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "af312fedb9ec4f16885d860eec31b732",
+          "Name": "materials",
+          "Description": "FluxMaterial[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b159f6c000ef4017aee660e194fa2069",
+          "Name": "sc1",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9d9af0b5e3a841a39dd3a4d3b0131982",
+          "Name": "sc2",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b7ea5b9fa7e24b0788f148c37cac0fd2",
+          "Name": "FluxConstruction",
+          "Description": "FluxConstruction",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "DynaFlux.Build.FluxConstruction.ByMaterialsFenestration@string,string,DynaFlux.Build.FluxMaterial[],double,double",
+      "Replication": "Auto",
+      "Description": "FluxConstruction.ByMaterialsFenestration (id: string, name: string, materials: FluxMaterial[], sc1: double, sc2: double): FluxConstruction"
     }
   ],
   "Connectors": [
@@ -2444,20 +2477,20 @@
     },
     {
       "Start": "b8ab6cf7deff452d81d95eb1da369e0b",
-      "End": "62495731c8364af2ae4c766f4da489a0",
-      "Id": "42cf1248bf804e4e8a4dc3a31ebacfb4",
+      "End": "af312fedb9ec4f16885d860eec31b732",
+      "Id": "5a8e6c6e92c24cf0904a8908f561fd20",
       "IsHidden": "False"
     },
     {
-      "Start": "34ab203cff314ebf84cefd43c8815d82",
-      "End": "a142cd1574ba4a938628daa9e7985afb",
-      "Id": "d0a0255ea98c4cd29d724663a12a7d4d",
+      "Start": "46930c3cba0245479e1be7d695fee56f",
+      "End": "d041e71daa3e4a60acaf62b426c94c15",
+      "Id": "b06f9004c3af48e0b01605f01bd25aa8",
       "IsHidden": "False"
     },
     {
-      "Start": "d2c90394dda6429dbce5bec43e45e99e",
-      "End": "308aa329b74e46769934a56951f70b91",
-      "Id": "179894200a4441b4bf420a6f557acffc",
+      "Start": "f24775e56b0b4397a368600705fe496c",
+      "End": "b7f658053e44495c968f43835ec78095",
+      "Id": "17671888353b4629ba3b7df2a1f793ad",
       "IsHidden": "False"
     },
     {
@@ -2516,14 +2549,14 @@
     },
     {
       "Start": "0fb201a2dcec4e3db71a977b9b625d7e",
-      "End": "658897699a4746ce9e6858000e5b6f43",
-      "Id": "d592cb3ef50d476192620e87023b5bc1",
+      "End": "b159f6c000ef4017aee660e194fa2069",
+      "Id": "5ee0de57f9514de680ae1390983ba2ec",
       "IsHidden": "False"
     },
     {
       "Start": "171eba4be18d4bd6b04b340224554d0a",
-      "End": "2a892d855b854340b008b7ee59da9548",
-      "Id": "c9c9120a1f8b4c8b9ac99eb05fecfbef",
+      "End": "9d9af0b5e3a841a39dd3a4d3b0131982",
+      "Id": "d4c4c62fb50b4c64a47f67011e214e1d",
       "IsHidden": "False"
     },
     {
@@ -2605,12 +2638,6 @@
       "IsHidden": "False"
     },
     {
-      "Start": "d9a410d21ea94eaf98df2eb256e203e5",
-      "End": "446cc1286be24316a51b1f4e15a75ea7",
-      "Id": "d8841864e579454cab254b278a9ba7e0",
-      "IsHidden": "False"
-    },
-    {
       "Start": "a97bdd6021f542ca921a12d3b0de260d",
       "End": "925d09979a0a4f01a5a1ac2a4f9698bc",
       "Id": "f281ff121c064a1886a34385befc898b",
@@ -2681,6 +2708,12 @@
       "End": "9464586b72ae4aad8e8ed610d9221657",
       "Id": "095c1b26b29d4481bbc0e2918be65347",
       "IsHidden": "False"
+    },
+    {
+      "Start": "b7ea5b9fa7e24b0788f148c37cac0fd2",
+      "End": "446cc1286be24316a51b1f4e15a75ea7",
+      "Id": "06fc86aa087e4a91838553e79ae0474c",
+      "IsHidden": "False"
     }
   ],
   "Dependencies": [],
@@ -2696,13 +2729,23 @@
         "f4bfec9e638c432f8ad919c99f03d176",
         "8112269b47a2469eb0505de3e8d6ce1c",
         "3f1862b7f1494c47a3042d6b74c57b61",
-        "585aa1b2e23a4613b6fd50aaf91f57ef",
         "d4bdcd6a7d9245adac1c4f084d696046",
         "c76bb56fbba849b8a101a319bd25778c",
         "d03e832591a947a0943e4955c3ba03e0",
         "a12d4d8d907642fd80700055239011bb",
         "a7044c8b1ec74bb38e567aa1f186bc7d",
-        "4e74d2673d504d8e8c6495a03b3006c8"
+        "4e74d2673d504d8e8c6495a03b3006c8",
+        "06f420f50a034d56a24a04970ebf654a",
+        "9d4b7aa4aa894e5eab0d2764e10bc148",
+        "eb8fc4a4882f47a3b114932452b55bb6"
+      ]
+    },
+    {
+      "Name": "TestBox_EttvReport.html",
+      "ReferenceType": "External",
+      "Nodes": [
+        "c76bb56fbba849b8a101a319bd25778c",
+        "6b38fe24adb24d6ba144a503c28bf809"
       ]
     }
   ],
@@ -3165,16 +3208,6 @@
         "Y": 1432.5385509254174
       },
       {
-        "Id": "585aa1b2e23a4613b6fd50aaf91f57ef",
-        "Name": "FluxConstruction.ByMaterials",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": 4948.490244087644,
-        "Y": 753.9329761467812
-      },
-      {
         "Id": "d4bdcd6a7d9245adac1c4f084d696046",
         "Name": "FluxModelEttvResult.FluxModelEttvResult",
         "IsSetAsInput": false,
@@ -3313,6 +3346,36 @@
         "ShowGeometry": true,
         "X": 5063.560445552785,
         "Y": -292.67725751078444
+      },
+      {
+        "Id": "06f420f50a034d56a24a04970ebf654a",
+        "Name": "FluxConstruction.ByUvalueFenestration",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 6136.607642755324,
+        "Y": 964.6937554179758
+      },
+      {
+        "Id": "9d4b7aa4aa894e5eab0d2764e10bc148",
+        "Name": "FluxConstruction.ByUvalue",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 6600.461927588187,
+        "Y": 978.6721843350691
+      },
+      {
+        "Id": "eb8fc4a4882f47a3b114932452b55bb6",
+        "Name": "FluxConstruction.ByMaterialsFenestration",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 4935.30491207298,
+        "Y": 720.4607487030196
       }
     ],
     "Annotations": [
@@ -3329,13 +3392,13 @@
           "8c1605fa9e23484a8e918325a53a2f44",
           "ca01add6d75e4752a624453946ed70ef",
           "25727ff1eb6e4860a0682974d6149a16",
-          "585aa1b2e23a4613b6fd50aaf91f57ef",
-          "1eac36ef4cc9498fadf72ce02b8a9885"
+          "1eac36ef4cc9498fadf72ce02b8a9885",
+          "eb8fc4a4882f47a3b114932452b55bb6"
         ],
         "HasNestedGroups": false,
         "Left": 3788.7017093506865,
         "Top": 579.3340324064168,
-        "Width": 1463.7885347369574,
+        "Width": 1545.6032027222936,
         "Height": 739.3905519727869,
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
@@ -3345,8 +3408,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -4816.000727674929,
-    "Y": -105.19250629231084,
-    "Zoom": 0.7204435045935258
+    "X": -1547.4278823989466,
+    "Y": 184.41065857302988,
+    "Zoom": 0.41804458249000376
   }
 }

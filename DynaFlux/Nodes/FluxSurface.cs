@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Autodesk.DesignScript.Geometry;
 
 namespace DynaFlux.Build
@@ -10,9 +11,9 @@ namespace DynaFlux.Build
     public class FluxSurface
     {
         /// <summary>
-        /// The geometric face representing the surface
+        /// The geometric surface representing this building surface
         /// </summary>
-        public Face Face { get; set; }
+        public Surface SurfaceGeometry { get; set; }
 
         /// <summary>
         /// Construction assembly of the surface
@@ -31,25 +32,24 @@ namespace DynaFlux.Build
 
         /// <summary>
         /// Correction factor for solar heat gain calculations.
-        /// Null for Opaque surfaces — set automatically in the constructor based on Construction.Type.
+        /// double.NaN for Opaque surfaces — set automatically in the constructor based on Construction.Type.
         /// </summary>
-        public double? CorrectionFactor => Orientation?.CorrectionFactor;
+        public double CorrectionFactor => Orientation?.CorrectionFactor ?? double.NaN;
 
         /// <summary>
         /// Creates a new FluxSurface with automatic area and orientation assignment
         /// </summary>
-        /// <param name="face">Geometric face</param>
+        /// <param name="surface">Geometric surface</param>
         /// <param name="construction">Construction assembly</param>
-        /// <param name="orientation">Surface orientation (if null, will be automatically derived from face normal)</param>
-        public FluxSurface(Face face, FluxConstruction construction, FluxOrientation orientation = null)
+        /// <param name="orientation">Surface orientation (if null, will be automatically derived from surface normal)</param>
+        public FluxSurface(Surface surface, FluxConstruction construction, FluxOrientation orientation = null)
         {
-            Face = face ?? throw new ArgumentNullException(nameof(face));
+            SurfaceGeometry = surface ?? throw new ArgumentNullException(nameof(surface));
             Construction = construction ?? throw new ArgumentNullException(nameof(construction));
             
-            // Auto-assign orientation from face normal if not provided
+            // Auto-assign orientation from surface normal if not provided
             if (orientation == null)
             {
-                var surface = face.SurfaceGeometry();
                 var normal = surface.NormalAtParameter(0.5, 0.5);
                 Orientation = FluxOrientation.FromNormal(normal);
             }
@@ -58,49 +58,79 @@ namespace DynaFlux.Build
                 Orientation = orientation;
             }
 
-            // Null out CorrectionFactor for opaque surfaces — it only applies to fenestration
+            // NaN-out CorrectionFactor for opaque surfaces — it only applies to fenestration
             if (string.Equals(Construction.Type, "Opaque", StringComparison.OrdinalIgnoreCase))
             {
-                Orientation.CorrectionFactor = null;
+                Orientation.CorrectionFactor = double.NaN;
             }
 
-            // Auto-assign area from the face
+            // Auto-assign area from the surface
             Area = CalculateArea();
         }
 
         /// <summary>
-        /// Creates a FluxSurface and automatically determines orientation from face normal
+        /// Creates a FluxSurface and automatically determines orientation from surface normal
         /// </summary>
-        /// <param name="face">Geometric face</param>
+        /// <param name="surface">Geometric surface</param>
         /// <param name="construction">Construction assembly</param>
         /// <returns>FluxSurface with calculated orientation</returns>
-        public static FluxSurface Create(Face face, FluxConstruction construction)
+        public static FluxSurface Create(Surface surface, FluxConstruction construction)
         {
-            if (face == null)
+            if (surface == null)
             {
-                throw new ArgumentNullException(nameof(face));
+                throw new ArgumentNullException(nameof(surface));
             }
 
-            // Get the center point of the face using mid parameters
-            var surface = face.SurfaceGeometry();
-            var centerPoint = surface.PointAtParameter(0.5, 0.5);
-            var normal = surface.NormalAtParameter(0.5, 0.5);
-
             // Create orientation from normal
+            var normal = surface.NormalAtParameter(0.5, 0.5);
             var orientation = FluxOrientation.FromNormal(normal);
 
-            return new FluxSurface(face, construction, orientation);
+            return new FluxSurface(surface, construction, orientation);
         }
 
         /// <summary>
-        /// Calculates the surface area
+        /// Creates FluxSurface objects from a list of surfaces.
+        /// </summary>
+        /// <param name="surfaces">Geometric surfaces</param>
+        /// <param name="construction">Construction assembly</param>
+        /// <returns>List of FluxSurface objects with calculated orientation</returns>
+        public static List<FluxSurface> Create(List<Surface> surfaces, FluxConstruction construction)
+        {
+            if (surfaces == null)
+            {
+                throw new ArgumentNullException(nameof(surfaces));
+            }
+
+            if (construction == null)
+            {
+                throw new ArgumentNullException(nameof(construction));
+            }
+
+            var result = new List<FluxSurface>();
+            foreach (var surface in surfaces)
+            {
+                if (surface != null)
+                {
+                    result.Add(Create(surface, construction));
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Square millimeters per square meter, used to convert Revit/Dynamo geometry (modeled in mm) to m²
+        /// </summary>
+        private const double SqMmPerSqM = 1_000_000.0;
+
+        /// <summary>
+        /// Calculates the surface area in square meters, converting from the mm-based geometry
         /// </summary>
         private double CalculateArea()
         {
-            if (Face != null)
+            if (SurfaceGeometry != null)
             {
-                var surface = Face.SurfaceGeometry();
-                return surface.Area;
+                return SurfaceGeometry.Area / SqMmPerSqM;
             }
             return 0.0;
         }
@@ -132,12 +162,12 @@ namespace DynaFlux.Build
             if (Orientation == null || Construction == null)
                 return 0.0;
 
-            // CorrectionFactor is null for Opaque surfaces — solar heat gain does not apply
-            if (CorrectionFactor == null)
+            // CorrectionFactor is NaN for Opaque surfaces — solar heat gain does not apply
+            if (double.IsNaN(CorrectionFactor))
                 return 0.0;
 
             double solarFactor = Orientation.GetSolarHeatGainFactor();
-            return Area * solarFactor * shadingCoefficient * CorrectionFactor.Value;
+            return Area * solarFactor * shadingCoefficient * CorrectionFactor;
         }
 
         /// <summary>
@@ -152,12 +182,12 @@ namespace DynaFlux.Build
         {
             double conductionComponent = Construction.Uvalue * temperatureDifference;
 
-            // CorrectionFactor is null for Opaque surfaces — radiation component does not apply
-            if (Orientation != null && CorrectionFactor != null)
+            // CorrectionFactor is NaN for Opaque surfaces — radiation component does not apply
+            if (Orientation != null && !double.IsNaN(CorrectionFactor))
             {
                 double solarComponent = Orientation.GetSolarHeatGainFactor()
                                         * shadingCoefficient
-                                        * CorrectionFactor.Value;
+                                        * CorrectionFactor;
                 return conductionComponent + solarComponent;
             }
 

@@ -71,44 +71,6 @@ namespace DynaFlux.Build
         /// Extracts unique facade orientations and constructions from surfaces
         /// Called automatically when Surfaces property is assigned
         /// </summary>
-        private void UpdateFacadeOrientationsAndConditions()
-        {
-            // Extract unique orientations
-            FacadeOrientations = new List<FluxOrientation>();
-            var orientationNames = new HashSet<string>();
-
-            foreach (var surface in _surfaces)
-            {
-                if (surface?.Orientation != null && !orientationNames.Contains(surface.Orientation.Name))
-                {
-                    FacadeOrientations.Add(surface.Orientation);
-                    orientationNames.Add(surface.Orientation.Name);
-                }
-            }
-
-            // Extract unique constructions
-            Constructions = _surfaces
-                .Where(s => s?.Construction != null)
-                .GroupBy(s => s.Construction.Id)
-                .Select(g => g.First().Construction)
-                .OrderBy(c => c.Id)
-                .ToList();
-            var constructionIds = new HashSet<string>();
-
-            foreach (var surface in _surfaces)
-            {
-                if (surface?.Construction != null && !constructionIds.Contains(surface.Construction.Id))
-                {
-                    Constructions.Add(surface.Construction);
-                    constructionIds.Add(surface.Construction.Id);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Extracts unique facade orientations and constructions from surfaces
-        /// Called automatically when Surfaces property is assigned
-        /// </summary>
         private void UpdateFacadeOrientationsAndConstructions()
         {
             // Extract unique orientations preserving order of appearance

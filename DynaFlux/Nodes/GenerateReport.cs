@@ -14,6 +14,8 @@ namespace DynaFlux.Report
     /// </summary>
     public static class EttvReport
     {
+        private const string FallbackVersion = "1.1.1";
+
         private static readonly Dictionary<string, string> OrientationAbbreviations =
             new Dictionary<string, string>
             {
@@ -95,9 +97,10 @@ namespace DynaFlux.Report
             sb.AppendLine("<body>");
 
             // --- Page header ---
+            string reportVersion = GetReportVersion();
             sb.AppendLine("<h1>Envelope Thermal Transfer Value (ETTV) Report</h1>");
             sb.AppendLine("<p>Produced with DynaFlux<br/>");
-            sb.AppendLine("Version: 1.0<br/>");
+            sb.AppendLine($"Version: {Encode(reportVersion)}<br/>");
             sb.AppendLine($"Project Name: {Encode(projectName)}<br/>");
             sb.AppendLine($"Date: {DateTime.Now:dd MMM yyyy}</p>");
             sb.AppendLine("<hr/>");
@@ -163,8 +166,9 @@ namespace DynaFlux.Report
                 {
                     string orientCell = firstRow ? $"<td rowspan=\"{rowCount}\">{Encode(orName)}</td>" : "";
                     firstRow = false;
+                    string opaqueLabel = $"{item.Construction?.Id ?? ""} - {item.Construction?.Name ?? ""}";
                     sb.AppendLine($"<tr>{orientCell}" +
-                                  $"<td>{Encode(item.Construction?.Id ?? "")}</td>" +
+                                  $"<td>{Encode(opaqueLabel)}</td>" +
                                   $"<td>Opaque</td>" +
                                   $"<td>{item.Construction?.Uvalue:F3}</td>" +
                                   $"<td>N/A</td>" +
@@ -175,9 +179,10 @@ namespace DynaFlux.Report
                 {
                     string orientCell = firstRow ? $"<td rowspan=\"{rowCount}\">{Encode(orName)}</td>" : "";
                     firstRow = false;
-                    string cfVal = or.CorrectionFactor.HasValue ? or.CorrectionFactor.Value.ToString("F2") : "N/A";
+                    string cfVal = !double.IsNaN(or.CorrectionFactor) ? or.CorrectionFactor.ToString("F2") : "N/A";
+                    string fenLabel = $"{item.Construction?.Id ?? ""} - {item.Construction?.Name ?? ""}";
                     sb.AppendLine($"<tr>{orientCell}" +
-                                  $"<td>{Encode(item.Construction?.Id ?? "")}</td>" +
+                                  $"<td>{Encode(fenLabel)}</td>" +
                                   $"<td>Fenestration</td>" +
                                   $"<td>{item.Construction?.Uvalue:F3}</td>" +
                                   $"<td>{item.Construction?.ScTot:F2}</td>" +
@@ -277,14 +282,14 @@ namespace DynaFlux.Report
                 sb.AppendLine($"<tr><th style=\"text-align:left;\">Gross Area</th><td>{or.GrossArea:F2} m&#178;</td></tr>");
                 sb.AppendLine($"<tr><th style=\"text-align:left;\">Total Gross Heat Gain</th><td>{grossHeatGain:F3} W</td></tr>");
 
-                if (or.CorrectionFactor.HasValue)
-                    sb.AppendLine($"<tr><th style=\"text-align:left;\">Correction Factor (CF)</th><td>{or.CorrectionFactor.Value:F2}</td></tr>");
+                if (!double.IsNaN(or.CorrectionFactor))
+                    sb.AppendLine($"<tr><th style=\"text-align:left;\">Correction Factor (CF)</th><td>{or.CorrectionFactor:F2}</td></tr>");
 
                 // Construction breakdown table (nested)
                 sb.AppendLine("<tr><td colspan=\"2\">");
                 sb.AppendLine("<table><tbody>");
 
-                double cf = or.CorrectionFactor ?? 0.0;
+                double cf = double.IsNaN(or.CorrectionFactor) ? 0.0 : or.CorrectionFactor;
 
                 // Group surfaces for this orientation by construction
                 var orientSurfaces = surfaces
@@ -353,6 +358,26 @@ namespace DynaFlux.Report
             sb.AppendLine("</html>");
 
             return sb.ToString();
+        }
+
+        private static string GetReportVersion()
+        {
+            var assembly = typeof(EttvReport).Assembly;
+
+            var informationalVersion = assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
+
+            if (!string.IsNullOrWhiteSpace(informationalVersion))
+            {
+                int metadataSeparator = informationalVersion.IndexOf('+');
+                return metadataSeparator > 0
+                    ? informationalVersion.Substring(0, metadataSeparator)
+                    : informationalVersion;
+            }
+
+            var assemblyVersion = assembly.GetName().Version?.ToString(3);
+            return string.IsNullOrWhiteSpace(assemblyVersion) ? FallbackVersion : assemblyVersion;
         }
 
         // -------------------------------------------------------------------------

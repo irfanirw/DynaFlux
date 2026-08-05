@@ -130,7 +130,7 @@ namespace DynaFlux.Result
                     double fenestrationAreaSCSum = fenestrationSurfaces.Sum(s => s.Area * (s.Construction?.ScTot ?? 1.0));
                     if (totalArea > 0)
                     {
-                        orientationResult.FenestrationRadiationHeatGain = 211.0 * fenestrationAreaSCSum * (orientation.CorrectionFactor ?? 0.0) / totalArea;
+                        orientationResult.FenestrationRadiationHeatGain = 211.0 * fenestrationAreaSCSum * (double.IsNaN(orientation.CorrectionFactor) ? 0.0 : orientation.CorrectionFactor) / totalArea;
                     }
                 }
 
