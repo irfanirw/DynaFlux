@@ -96,12 +96,25 @@ namespace DynaFlux.Result
                     double totalFenestrationArea = fenestrationSurfaces.Sum(s => s.Area);
                     double totalArea = totalOpaqueArea + totalFenestrationArea; // Ao
 
+                    orientationResult.OpaqueArea = totalOpaqueArea;
+                    orientationResult.FenestrationArea = totalFenestrationArea;
+                    orientationResult.GrossArea = totalArea;
+
+                    // Collect unique constructions sorted by Id
+                    orientationResult.UniqueConstructions = surfacesWithOrientation
+                        .Select(s => s.Construction)
+                        .Where(c => c != null)
+                        .GroupBy(c => c.Id)
+                        .Select(g => g.First())
+                        .OrderBy(c => c.Id, StringComparer.Ordinal)
+                        .ToList();
+
                     // Calculate opaque conduction heat gain
-                    // Formula: 12 × Σ(Awi × Uwi) / Aw
+                    // Formula: 12 × Σ(Awi × Uwi) / Ao
                     double opaqueAreaUvalueSum = opaqueSurfaces.Sum(s => s.Area * (s.Construction?.Uvalue ?? 0.0));
-                    if (totalOpaqueArea > 0)
+                    if (totalArea > 0)
                     {
-                        orientationResult.OpaqueConductionHeatGain = 12.0 * opaqueAreaUvalueSum / totalOpaqueArea;
+                        orientationResult.OpaqueConductionHeatGain = 12.0 * opaqueAreaUvalueSum / totalArea;
                     }
 
                     // Calculate fenestration conduction heat gain
@@ -117,7 +130,7 @@ namespace DynaFlux.Result
                     double fenestrationAreaSCSum = fenestrationSurfaces.Sum(s => s.Area * (s.Construction?.ScTot ?? 1.0));
                     if (totalArea > 0)
                     {
-                        orientationResult.FenestrationRadiationHeatGain = 211.0 * fenestrationAreaSCSum * (orientation.CorrectionFactor ?? 0.0) / totalArea;
+                        orientationResult.FenestrationRadiationHeatGain = 211.0 * fenestrationAreaSCSum * (double.IsNaN(orientation.CorrectionFactor) ? 0.0 : orientation.CorrectionFactor) / totalArea;
                     }
                 }
 

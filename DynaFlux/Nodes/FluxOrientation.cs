@@ -27,10 +27,10 @@ namespace DynaFlux.Build
 
         /// <summary>
         /// Correction factor based on orientation.
-        /// Null for Opaque surfaces (correction factor does not apply).
+        /// double.NaN for Opaque surfaces (correction factor does not apply).
         /// Used in BCA ETTV calculations for orientation-specific adjustments.
         /// </summary>
-        public double? CorrectionFactor { get; set; }
+        public double CorrectionFactor { get; set; }
 
         /// <summary>
         /// Creates a new FluxOrientation
